@@ -1,22 +1,48 @@
 #include<iostream>
+#include<fstream>
 using namespace std;
 
-class C{
-    int n,m ;
-    public:
-    C(int a,int b):n(a), m(b){}
+class A{
+    int b=3;
+    int j;
+    char arr[32];
 
-    bool operator==(C &obj){
-        return (n == obj.n) && (m == obj.m);
+    public:
+    void get(){
+        cout<<this->b<<endl;
+        cout<<sizeof(this)<<endl;
+        cout<<sizeof(*this)<<endl;
+    }
+    
+
+    friend bool operator== (A a1, A a2){
+        return 3;
     }
 };
 
 int main(){
-    C one(1, 2), two(1, 2);
+    // char name[40];
+    // // cin>>name;
+    // cin.getline(name, sizeof(name));
+    // cout<<name;
+    // cout<<4;
 
-    // cout<<(one == two)<<endl;
-    string s;
-    // cin>>s;
-    std::getline(std::cin, s, static_cast<char>(EOF));
-    cout<<"\n"<<s<<endl;
+    // A fff;
+    // fff.get();
+
+    // cout<<3;
+    // system("pause");
+    // cout<<34;
+
+    A fff, ggg;
+    cout<<(fff == ggg);
+
+    int a[] = {1,2,  3, 4,5 ,5555,5 , 323};
+    for(auto i:a) cout<<i<<" ";
+
+    fstream f;
+    f.open("usersinfo.dat", ios::in);
+    if(f){
+        cout<<"\n"<<f.tellg()<<endl;
+    }
 }
