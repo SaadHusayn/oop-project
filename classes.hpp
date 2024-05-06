@@ -1,5 +1,5 @@
-#ifndef PAGES_H
-#define PAGES_H
+#ifndef CLASSES_H
+#define CLASSES_H
 
 #include <iostream>
 #include <windows.h>
@@ -13,48 +13,62 @@ using namespace std;
 #define PASSWORD_SIZE 20
 #define FULL_NAME_SIZE 40
 #define DESCRIPTION_SIZE 120
+#define DATE_OF_BIRTH_SIZE 30
+#define GENDER_SIZE 10
 #define SECURITY_QUESTION_SIZE 20
 
 class UserInfo{
     protected:
-    char full_name[FULL_NAME_SIZE], description[DESCRIPTION_SIZE], password[PASSWORD_SIZE],  security_question[SECURITY_QUESTION_SIZE], username[USERNAME_SIZE];
+    char full_name[FULL_NAME_SIZE], description[DESCRIPTION_SIZE], password[PASSWORD_SIZE],  security_question[SECURITY_QUESTION_SIZE], username[USERNAME_SIZE], date_of_birth[DATE_OF_BIRTH_SIZE], gender[GENDER_SIZE];
 
     public:
     UserInfo(){}
 
     //getters and setters
     void set_full_name(char *_full_name){strcpy(full_name, _full_name);}
-    char get_full_name(char *_full_name){strcpy(_full_name, full_name);}
+    void get_full_name(char *_full_name){strcpy(_full_name, full_name);}
 
     void set_description(char *_description){strcpy(description, _description);}
-    char get_description(char *_description){strcpy(_description, description);}
+    void get_description(char *_description){strcpy(_description, description);}
 
     void set_password(char *_password){strcpy(password, _password);}
-    char get_password(char *_password){strcpy(_password, password);}
+    void get_password(char *_password){strcpy(_password, password);}
 
     void set_security_question(char *_security_question){strcpy(security_question, _security_question);}
-    char get_security_question(char *_security_question){strcpy(_security_question, security_question);}
+    void get_security_question(char *_security_question){strcpy(_security_question, security_question);}
 
     void set_username(char *_username){strcpy(username, _username);}
-    char get_username(char *_username){strcpy(_username, username);}
+    void get_username(char *_username){strcpy(_username, username);}
+
+    void set_date_of_birth(char *_date_of_birth){strcpy(date_of_birth, _date_of_birth);}
+    void get_date_of_birth(char *_date_of_birth){strcpy(_date_of_birth, date_of_birth);}
+
+    void set_gender(char *_gender){strcpy(gender, _gender);}
+    void get_gender(char *_gender){strcpy(_gender, gender);}
 
     void getData(){
         system("cls");
 
         cout<<"\nEnter Full Name: "<<endl;
-        cin.getline(full_name, sizeof(full_name));
+        cin.getline(full_name, FULL_NAME_SIZE);
 
         cout<<"Enter Username: "<<endl;
-        cin.getline(username, sizeof(username));
+        cin.getline(username, USERNAME_SIZE);
 
         cout<<"Enter Password: "<<endl;
-        cin.getline(password, sizeof(password));
+        cin.getline(password, PASSWORD_SIZE);
+
+        cout<<"Enter Date Of Birth: "<<endl;
+        cin.getline(date_of_birth, DATE_OF_BIRTH_SIZE);
+
+        cout<<"Enter Gender: "<<endl;
+        cin.getline(gender, GENDER_SIZE);
 
         cout<<"Enter Description/Bio: "<<endl;
-        cin.getline(description, sizeof(description));
+        cin.getline(description, DESCRIPTION_SIZE);
 
         cout<<"Security Question: What is your favourite athelete?"<<endl;
-        cin.getline(security_question, sizeof(security_question));
+        cin.getline(security_question, SECURITY_QUESTION_SIZE);
 
     }
 
@@ -90,7 +104,8 @@ class UserInfo{
     void displayUserInfo(){
         cout<<"\nName: "<<full_name<<endl;
         cout<<"Username: "<<username<<endl;
-        cout<<"Password: "<<password<<endl;
+        cout<<"Date Of Birth: "<<date_of_birth<<endl;
+        cout<<"Gender: "<<gender<<endl;
         cout<<"Description/Bio: "<<description<<endl;
         cout<<"Favourite Athele: "<<security_question<<endl;
 
