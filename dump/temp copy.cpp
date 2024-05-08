@@ -1,16 +1,17 @@
 #include<iostream>
 #include<fstream>
 #include<string.h>
-#include "temp.hpp"
+// #include "temp.hpp"
+#include<typeinfo>
 using namespace std;
 
-class A{
+class _Adsf{
     public:
     int b=3;
     int j;
     char arr[32];
 
-    A(int m):j(m){}
+    _Adsf(int m):j(m){}
     void get(){
         cout<<this->b<<endl;
         cout<<sizeof(this)<<endl;
@@ -18,7 +19,7 @@ class A{
     }
     
 
-    friend bool operator== (A a1, A a2){
+    friend bool operator== (_Adsf a1, _Adsf a2){
         return 3;
     }
 };
@@ -61,5 +62,5 @@ int main(){
     // strcpy(abc, "Amir");
     // cout<<abc<< " " <<sizeof(abc)<<endl;
 
-    
+    cout<<typeid(_Adsf).name()<<endl;
 }

@@ -133,7 +133,6 @@ class UserInfo{
 };
 
 
-
 class ViewPostPage {
 private:
 UserInfo userinfo;
@@ -149,7 +148,7 @@ public:
     }
 };
 
-class FriendRequestPage {
+class CreatePostPage {
 private:
 UserInfo userinfo;
 public:
@@ -158,13 +157,14 @@ public:
     }
     void display() {
         system("cls");
-        cout << "This is This is Friend Request Page of The User" << endl;
+        cout << "This is This is Create Post Page of The User" << endl;
         cout << "we are still working on it" << endl;
         system("pause");
     }
 };
 
-class AddFriendsPage {
+class EditPostPage {
+    
 private:
 UserInfo userinfo;
 public:
@@ -173,11 +173,59 @@ public:
     }
     void display() {
         system("cls");
-        cout << "This is This is Add Friends Page of The User" << endl;
+        cout << "This is This is Edit Post Page of The User" << endl;
         cout << "we are still working on it" << endl;
         system("pause");
     }
 };
+
+class DeletePostPage {
+    
+private:
+UserInfo userinfo;
+public:
+    void setUserInfo(UserInfo uinfo){
+        userinfo = uinfo;
+    }
+    void display() {
+        system("cls");
+        cout << "This is This is Delete Post Page of The User" << endl;
+        cout << "we are still working on it" << endl;
+        system("pause");
+    }
+};
+
+
+class AddCommentPage {
+private:
+UserInfo userinfo;
+public:
+    void setUserInfo(UserInfo uinfo){
+        userinfo = uinfo;
+    }
+    void display() {
+        system("cls");
+        cout << "This is This is Add Comments Page of The User" << endl;
+        cout << "we are still working on it" << endl;
+        system("pause");
+    }
+};
+
+class  AddLikePage{
+private:
+UserInfo userinfo;
+public:
+    void setUserInfo(UserInfo uinfo){
+        userinfo = uinfo;
+    }
+    void display() {
+        system("cls");
+        cout << "This is This is Add Like Page of The User" << endl;
+        cout << "we are still working on it" << endl;
+        system("pause");
+    }
+};
+
 
 class YourInformationPage {
 private:
@@ -197,9 +245,12 @@ public:
 class AccountDashboardPage{
     
     private:
-    FriendRequestPage friendrequestsPage;
-    AddFriendsPage addfriendsPage;
-    ViewPostPage viewpostsPage;
+    ViewPostPage viewpostPage;
+    CreatePostPage createpostPage;
+    EditPostPage editpostPage;
+    DeletePostPage deletepostPage;
+    AddCommentPage addcommentPage;
+    AddLikePage addlikePage;
     YourInformationPage yourinformationPage;
     UserInfo userinfo;
 
@@ -210,10 +261,13 @@ class AccountDashboardPage{
 
     void setUserInfo(UserInfo uinfo){
         userinfo = uinfo;
-        viewpostsPage.setUserInfo(userinfo);
-        addfriendsPage.setUserInfo(userinfo);
+        viewpostPage.setUserInfo(userinfo);
+        createpostPage.setUserInfo(userinfo);
+        editpostPage.setUserInfo(userinfo);
+        deletepostPage.setUserInfo(userinfo);
+        addcommentPage.setUserInfo(userinfo);
+        addlikePage.setUserInfo(userinfo);
         yourinformationPage.setUserInfo(userinfo);
-        friendrequestsPage.setUserInfo(userinfo);
     }
 
     void displayMenu(){
@@ -221,12 +275,15 @@ class AccountDashboardPage{
         system("cls");
         cout << "Welcome To Socialize" << endl;
         cout << "Account DashBoard For "<<  endl << endl;
-        cout << "1. View Posts" << endl;
-        cout << "2. View Friend Requests" << endl;
-        cout << "3. Add Friends" << endl;
-        cout << "4. Your Information" << endl;
-        cout << "5. Log Out"<<endl;
-        cout << "6. Exit"<<endl;
+        cout << "1. View All Posts" << endl;
+        cout << "2. Create Post" << endl;
+        cout << "3. Edit Post" << endl;
+        cout << "4. Delete Post" << endl;
+        cout << "5. Add Comment To Post" << endl;
+        cout << "6. Add Like To Post"<<endl;
+        cout << "7. View Your Information"<<endl;
+        cout << "8. Logout Account"<<endl;
+        cout << "9. Exit"<<endl;
     }
 
     void run() {
@@ -239,35 +296,50 @@ class AccountDashboardPage{
                 switch (choice) {
                     case 1:
                     {
-                        viewpostsPage.display();
+                        viewpostPage.display();
                         break;
                     }
                     case 2:
                     {
-                        friendrequestsPage.display();
+                        createpostPage.display();
                         break;
                     }
                     case 3:
                     {
-                        addfriendsPage.display();
+                        editpostPage.display();
                         break;
                     }
                     case 4:
                     {
-                        yourinformationPage.display();
+                        deletepostPage.display();
                         break;
                     }
                     case 5:
                     {
-                        return;
+                        addcommentPage.display();
+                        break;
                     }
                     case 6:
+                    {
+                        addlikePage.display();
+                        break;
+                    }
+                    case 7:
+                    {
+                        yourinformationPage.display();
+                        break;
+                    }
+                    case 8:
+                    {
+                        return;
+                    }
+                    case 9:
                     {
                         Sleep(1000);
                         exit(0);
                     }
                 }
-            } while (choice < 1 || choice > 6);
+            } while (choice < 1 || choice > 9);
         }
     }
 };

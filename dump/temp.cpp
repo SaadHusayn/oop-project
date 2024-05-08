@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string.h>
 using namespace std;
 
 class C{
@@ -16,7 +17,11 @@ int main(){
 
     // cout<<(one == two)<<endl;
     string s;
+    // char s[100];
     // cin>>s;
-    std::getline(std::cin, s, static_cast<char>(EOF));
-    cout<<"\n"<<s<<endl;
+    getline(cin, s, static_cast<char>(-1));
+
+    const char *str = s.c_str();
+    cout<<"\n"<<str<<endl;
+    cout<<sizeof(str)<<endl;
 }
