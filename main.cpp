@@ -1,6 +1,7 @@
-#include"classes.hpp"
+#include "classes.hpp"
 
-int main() {
+int main()
+{
     SocializeApp app;
     app.run();
     return 0;

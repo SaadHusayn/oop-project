@@ -19,7 +19,7 @@ int main(){
     string s;
     // char s[100];
     // cin>>s;
-    getline(cin, s, static_cast<char>(-1));
+    getline(cin, s, static_cast<char>(EOF));
 
     const char *str = s.c_str();
     cout<<"\n"<<str<<endl;

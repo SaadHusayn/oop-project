@@ -4,9 +4,9 @@
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
-#include<stdlib.h>
-#include<fstream>
-#include<string.h>
+#include <stdlib.h>
+#include <fstream>
+#include <string.h>
 using namespace std;
 
 #define USERNAME_SIZE 20
@@ -16,162 +16,382 @@ using namespace std;
 #define DATE_OF_BIRTH_SIZE 30
 #define GENDER_SIZE 10
 #define SECURITY_QUESTION_SIZE 20
+#define CONTENT_SIZE 1000
+#define MAX_COMMENTS 50
+#define COMMENT_SIZE 50
+#define TITLE_SIZE 50
 
-class UserInfo{
-    protected:
-    char full_name[FULL_NAME_SIZE], description[DESCRIPTION_SIZE], password[PASSWORD_SIZE],  security_question[SECURITY_QUESTION_SIZE], username[USERNAME_SIZE], date_of_birth[DATE_OF_BIRTH_SIZE], gender[GENDER_SIZE];
+class UserInfo
+{
+protected:
+    char full_name[FULL_NAME_SIZE], description[DESCRIPTION_SIZE], password[PASSWORD_SIZE], security_question[SECURITY_QUESTION_SIZE], username[USERNAME_SIZE], date_of_birth[DATE_OF_BIRTH_SIZE], gender[GENDER_SIZE];
 
-    public:
-    UserInfo(){}
+public:
+    UserInfo() {}
 
-    //getters and setters
-    void set_full_name(char *_full_name){strcpy(full_name, _full_name);}
-    void get_full_name(char *_full_name){strcpy(_full_name, full_name);}
+    // getters and setters
+    void set_full_name(const char *_full_name)
+    {
+        strncpy(full_name, _full_name, FULL_NAME_SIZE - 1);
+        full_name[FULL_NAME_SIZE - 1] = '\0';
+    }
+    const char *get_full_name() { return full_name; }
 
-    void set_description(char *_description){strcpy(description, _description);}
-    void get_description(char *_description){strcpy(_description, description);}
+    void set_description(const char *_description)
+    {
+        strncpy(description, _description, DESCRIPTION_SIZE - 1);
+        description[DESCRIPTION_SIZE - 1] = '\0';
+    }
+    const char *get_description() { return description; }
 
-    void set_password(char *_password){strcpy(password, _password);}
-    void get_password(char *_password){strcpy(_password, password);}
+    void set_password(const char *_password)
+    {
+        strncpy(password, _password, PASSWORD_SIZE - 1);
+        password[PASSWORD_SIZE - 1] = '\0';
+    }
+    const char *get_password() { return password; }
 
-    void set_security_question(char *_security_question){strcpy(security_question, _security_question);}
-    void get_security_question(char *_security_question){strcpy(_security_question, security_question);}
+    void set_security_question(const char *_security_question)
+    {
+        strncpy(security_question, _security_question, SECURITY_QUESTION_SIZE - 1);
+        security_question[SECURITY_QUESTION_SIZE - 1] = '\0';
+    }
+    const char *get_security_question() { return security_question; }
 
-    void set_username(char *_username){strcpy(username, _username);}
-    void get_username(char *_username){strcpy(_username, username);}
+    void set_username(const char *_username)
+    {
+        strncpy(username, _username, USERNAME_SIZE - 1);
+        username[USERNAME_SIZE - 1] = '\0';
+    }
+    const char *get_username() { return username; }
 
-    void set_date_of_birth(char *_date_of_birth){strcpy(date_of_birth, _date_of_birth);}
-    void get_date_of_birth(char *_date_of_birth){strcpy(_date_of_birth, date_of_birth);}
+    void set_date_of_birth(const char *_date_of_birth)
+    {
+        strncpy(date_of_birth, _date_of_birth, DATE_OF_BIRTH_SIZE - 1);
+        date_of_birth[DATE_OF_BIRTH_SIZE - 1] = '\0';
+    }
+    const char *get_date_of_birth() { return date_of_birth; }
 
-    void set_gender(char *_gender){strcpy(gender, _gender);}
-    void get_gender(char *_gender){strcpy(_gender, gender);}
+    void set_gender(const char *_gender)
+    {
+        strncpy(gender, _gender, GENDER_SIZE - 1);
+        gender[GENDER_SIZE - 1] = '\0';
+    }
+    const char *get_gender() { return gender; }
 
-    void getData(){
+    void getData()
+    {
         system("cls");
 
-        cout<<"\nEnter Full Name: "<<endl;
+        cout << "\nEnter Full Name: " << endl;
         cin.getline(full_name, FULL_NAME_SIZE);
 
-        cout<<"Enter Username: "<<endl;
+        cout << "Enter Username: " << endl;
         cin.getline(username, USERNAME_SIZE);
 
-        cout<<"Enter Password: "<<endl;
+        cout << "Enter Password: " << endl;
         cin.getline(password, PASSWORD_SIZE);
 
-        cout<<"Enter Date Of Birth: "<<endl;
+        cout << "Enter Date Of Birth: " << endl;
         cin.getline(date_of_birth, DATE_OF_BIRTH_SIZE);
 
-        cout<<"Enter Gender: "<<endl;
+        cout << "Enter Gender: " << endl;
         cin.getline(gender, GENDER_SIZE);
 
-        cout<<"Enter Description/Bio: "<<endl;
+        cout << "Enter Description/Bio: " << endl;
         cin.getline(description, DESCRIPTION_SIZE);
 
-        cout<<"Security Question: What is your favourite athelete?"<<endl;
+        cout << "Security Question: What is your favourite athelete?" << endl;
         cin.getline(security_question, SECURITY_QUESTION_SIZE);
-
     }
 
-    void storeInFile(){
+    void storeInFile()
+    {
         fstream f;
-        f.open("usersinfo.dat",ios::binary | ios::app);
+        f.open("usersinfo.dat", ios::binary | ios::app);
 
-        if(f){
-            f.write(reinterpret_cast<char*>(this), sizeof(*this));
+        if (f)
+        {
+            f.write(reinterpret_cast<char *>(this), sizeof(*this));
             f.close();
-            cout<<"\nInformation stored successfully"<<endl;
+            cout << "\nInformation stored successfully" << endl;
             system("pause");
         }
-        else cout<<"\nError Opening File"<<endl;
+        else
+        {
+            cout << "\nError Opening File" << endl;
+        }
     }
 
-    void displayAllUserInfo(){
+    void displayAllUserInfo()
+    {
         fstream f;
-        f.open("usersinfo.dat",ios::binary | ios::in);
+        f.open("usersinfo.dat", ios::binary | ios::in);
 
-        if(f){
-            f.read(reinterpret_cast<char*>(this), sizeof(*this));
-            while(f){
+        if (f)
+        {
+            f.read(reinterpret_cast<char *>(this), sizeof(*this));
+            while (f)
+            {
                 displayUserInfo();
-                f.read(reinterpret_cast<char*>(this), sizeof(*this));
+                f.read(reinterpret_cast<char *>(this), sizeof(*this));
             }
             f.close();
             system("pause");
         }
-        else cout<<"\nError Opening File"<<endl;
+        else
+            cout << "\nError Opening File" << endl;
     }
 
-    void displayUserInfo(){
-        cout<<"\nName: "<<full_name<<endl;
-        cout<<"Username: "<<username<<endl;
-        cout<<"Date Of Birth: "<<date_of_birth<<endl;
-        cout<<"Gender: "<<gender<<endl;
-        cout<<"Description/Bio: "<<description<<endl;
-        cout<<"Favourite Athele: "<<security_question<<endl;
+    void displayUserInfo()
+    {
+        cout << "\nName: " << full_name << endl;
+        cout << "Username: " << username << endl;
+        cout << "Date Of Birth: " << date_of_birth << endl;
+        cout << "Gender: " << gender << endl;
+        cout << "Description/Bio: " << description << endl;
+        cout << "Favourite Athele: " << security_question << endl;
 
         system("pause");
     }
 
-    bool isValidInfo(char _username[], char _password[]){
+    bool isValidInfo(char _username[], char _password[])
+    {
         fstream f;
         f.open("usersinfo.dat", ios::in | ios::binary);
 
-        if(f){
-            f.read(reinterpret_cast<char*>(this), sizeof(*this));
-            while(f){
-                if((!strcmp(username, _username)) && (!strcmp(password, _password))){
+        if (f)
+        {
+            f.read(reinterpret_cast<char *>(this), sizeof(*this));
+            while (f)
+            {
+                if ((!strcmp(username, _username)) && (!strcmp(password, _password)))
+                {
                     f.close();
                     return true;
                 }
-                f.read(reinterpret_cast<char*>(this), sizeof(*this));
+                f.read(reinterpret_cast<char *>(this), sizeof(*this));
             }
             f.close();
             return false;
         }
-        else  cerr<<"\nError Opening File"<<endl;
+        else
+            cerr << "\nError Opening File" << endl;
+    }
+};
+class Comment
+{
+private:
+    char content[COMMENT_SIZE];
+    char username[USERNAME_SIZE];
+
+public:
+    Comment() {}
+
+    void setusername(const char *_username)
+    {
+        strncpy(username, _username, USERNAME_SIZE - 1);
+        username[USERNAME_SIZE - 1] = '\0';
+    }
+    const char *getusername(char *_username) { strcpy(_username, username); }
+
+    void setcontent(const char *_content)
+    {
+        strncpy(content, _content, CONTENT_SIZE - 1);
+        content[CONTENT_SIZE - 1] = '\0';
+    }
+    const char *getcontent(char *_content) { strcpy(_content, content); }
+};
+class Post
+{
+private:
+    char username[USERNAME_SIZE], title[TITLE_SIZE], content[CONTENT_SIZE];
+    Comment comments[MAX_COMMENTS];
+    int no_comments, no_likes, post_ID;
+
+public:
+    Post()
+    {
+        no_comments = 0;
+        no_likes = 0;
+    }
+    Post(char uname[])
+    {
+        strcpy(username, uname);
+        no_comments = 0;
+        no_likes = 0;
+    }
+
+    // getter and setters
+    void setusername(const char *_username)
+    {
+        strncpy(username, _username, USERNAME_SIZE - 1);
+        username[USERNAME_SIZE - 1] = '\0';
+    }
+    const char *getusername(char *_username) { strcpy(_username, username); }
+
+    void settitle(const char *_title)
+    {
+        strncpy(title, _title, TITLE_SIZE - 1);
+        title[TITLE_SIZE - 1] = '\0';
+    }
+    const char *gettitle(char *_title) { strcpy(_title, title); }
+
+    void setcontent(const char *_content)
+    {
+        strncpy(content, _content, CONTENT_SIZE - 1);
+        content[CONTENT_SIZE - 1] = '\0';
+    }
+    const char *getcontent(char *_content) { strcpy(_content, content); }
+
+    void setno_comments(int _no_comments) { no_comments = _no_comments; }
+    int getno_comments() { return no_comments; }
+
+    void setno_likes(int _no_likes) { no_likes = _no_likes; }
+    int getno_likes() { return no_likes; }
+
+    void setpost_ID(int _post_ID) { post_ID = _post_ID; }
+    int getpost_ID() { return post_ID; }
+
+    void getPostData()
+    {
+        cout << "Enter Post ID: " << endl;
+        cin >> post_ID;
+
+        cin.ignore();
+
+        cout << "\nEnter Post Title: " << endl;
+        cin.getline(title, TITLE_SIZE);
+
+        string s;
+        cout << "\nEnter Post Content: (Enter + Ctrl-Z) to Exit" << endl;
+        getline(cin, s, static_cast<char>(EOF));
+
+        strcpy(content, s.c_str());
+    }
+
+    void displayPostData()
+    {
+        cout << "\nPost ID: " << post_ID << endl;
+        cout << "UserName: " << username << endl;
+        cout << "Post Title: " << title << endl;
+        cout << "Post Content: " << "\n"
+             << content;
+        if (no_comments)
+        {
+            cout << "Comments:" << endl;
+            char uname[USERNAME_SIZE], comment[COMMENT_SIZE];
+            for (int i = 0; i < no_comments; i++)
+            {
+                comments[i].getusername(uname);
+                comments[i].getcontent(comment);
+                cout << "\nUsername: " << uname << endl;
+                cout << "Comment: " << comment << endl;
+            }
+        }
+        else
+        {
+            cout << "(No Comments for this post)" << endl;
+        }
+    }
+
+    void displayAllPostData()
+    {
+        fstream f;
+        f.open("posts.dat", ios::binary | ios::in);
+
+        if (f)
+        {
+            f.read(reinterpret_cast<char *>(this), sizeof(*this));
+            while (f)
+            {
+                displayPostData();
+                f.read(reinterpret_cast<char *>(this), sizeof(*this));
+            }
+            f.close();
+            system("pause");
+        }
+        else
+        {
+            cout << "\nError Opening File" << endl;
+        }
+    }
+    void storeInFile()
+    {
+        fstream f;
+        f.open("posts.dat", ios::binary | ios::app);
+
+        if (f)
+        {
+            f.write(reinterpret_cast<char *>(this), sizeof(*this));
+            f.close();
+            cout << "\nInformation stored successfully" << endl;
+            system("pause");
+        }
+        else
+        {
+            cout << "\nError Opening File" << endl;
+        }
     }
 };
 
-
-class ViewPostPage {
+class ViewPostPage
+{
 private:
-UserInfo userinfo;
+    UserInfo userinfo;
+    Post post;
+
 public:
-    void setUserInfo(UserInfo uinfo){
+    void setUserInfo(UserInfo uinfo)
+    {
         userinfo = uinfo;
     }
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "This is This is View Post Page of The User" << endl;
-        cout << "we are still working on it" << endl;
+        post.displayAllPostData();
         system("pause");
     }
 };
 
-class CreatePostPage {
+class CreatePostPage
+{
 private:
-UserInfo userinfo;
+    UserInfo userinfo;
+    Post post;
+
 public:
-    void setUserInfo(UserInfo uinfo){
+    void setUserInfo(UserInfo uinfo)
+    {
         userinfo = uinfo;
+        post.setusername(uinfo.get_username());
     }
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "This is This is Create Post Page of The User" << endl;
-        cout << "we are still working on it" << endl;
+        post.getPostData();
+
+        post.storeInFile();
+
         system("pause");
     }
 };
 
-class EditPostPage {
-    
+class EditPostPage
+{
+
 private:
-UserInfo userinfo;
+    UserInfo userinfo;
+
 public:
-    void setUserInfo(UserInfo uinfo){
+    void setUserInfo(UserInfo uinfo)
+    {
         userinfo = uinfo;
     }
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "This is This is Edit Post Page of The User" << endl;
         cout << "we are still working on it" << endl;
@@ -179,15 +399,19 @@ public:
     }
 };
 
-class DeletePostPage {
-    
+class DeletePostPage
+{
+
 private:
-UserInfo userinfo;
+    UserInfo userinfo;
+
 public:
-    void setUserInfo(UserInfo uinfo){
+    void setUserInfo(UserInfo uinfo)
+    {
         userinfo = uinfo;
     }
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "This is This is Delete Post Page of The User" << endl;
         cout << "we are still working on it" << endl;
@@ -195,15 +419,18 @@ public:
     }
 };
 
-
-class AddCommentPage {
+class AddCommentPage
+{
 private:
-UserInfo userinfo;
+    UserInfo userinfo;
+
 public:
-    void setUserInfo(UserInfo uinfo){
+    void setUserInfo(UserInfo uinfo)
+    {
         userinfo = uinfo;
     }
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "This is This is Add Comments Page of The User" << endl;
         cout << "we are still working on it" << endl;
@@ -211,14 +438,18 @@ public:
     }
 };
 
-class  AddLikePage{
+class AddLikePage
+{
 private:
-UserInfo userinfo;
+    UserInfo userinfo;
+
 public:
-    void setUserInfo(UserInfo uinfo){
+    void setUserInfo(UserInfo uinfo)
+    {
         userinfo = uinfo;
     }
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "This is This is Add Like Page of The User" << endl;
         cout << "we are still working on it" << endl;
@@ -226,15 +457,18 @@ public:
     }
 };
 
-
-class YourInformationPage {
+class YourInformationPage
+{
 private:
-UserInfo userinfo;
+    UserInfo userinfo;
+
 public:
-    void setUserInfo(UserInfo uinfo){
+    void setUserInfo(UserInfo uinfo)
+    {
         userinfo = uinfo;
     }
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "This is This is Your Information Page of The User" << endl;
         userinfo.displayUserInfo();
@@ -242,9 +476,10 @@ public:
     }
 };
 
-class AccountDashboardPage{
-    
-    private:
+class AccountDashboardPage
+{
+
+private:
     ViewPostPage viewpostPage;
     CreatePostPage createpostPage;
     EditPostPage editpostPage;
@@ -254,12 +489,12 @@ class AccountDashboardPage{
     YourInformationPage yourinformationPage;
     UserInfo userinfo;
 
+public:
+    AccountDashboardPage() {}
+    AccountDashboardPage(UserInfo uinfo) : userinfo(uinfo) {}
 
-    public:
-    AccountDashboardPage(){}
-    AccountDashboardPage(UserInfo uinfo): userinfo(uinfo){}
-
-    void setUserInfo(UserInfo uinfo){
+    void setUserInfo(UserInfo uinfo)
+    {
         userinfo = uinfo;
         viewpostPage.setUserInfo(userinfo);
         createpostPage.setUserInfo(userinfo);
@@ -270,87 +505,95 @@ class AccountDashboardPage{
         yourinformationPage.setUserInfo(userinfo);
     }
 
-    void displayMenu(){
-        
+    void displayMenu()
+    {
+
         system("cls");
         cout << "Welcome To Socialize" << endl;
-        cout << "Account DashBoard For "<<  endl << endl;
+        cout << "Account DashBoard For " << endl
+             << endl;
         cout << "1. View All Posts" << endl;
         cout << "2. Create Post" << endl;
         cout << "3. Edit Post" << endl;
         cout << "4. Delete Post" << endl;
         cout << "5. Add Comment To Post" << endl;
-        cout << "6. Add Like To Post"<<endl;
-        cout << "7. View Your Information"<<endl;
-        cout << "8. Logout Account"<<endl;
-        cout << "9. Exit"<<endl;
+        cout << "6. Add Like To Post" << endl;
+        cout << "7. View Your Information" << endl;
+        cout << "8. Logout Account" << endl;
+        cout << "9. Exit" << endl;
     }
 
-    void run() {
-        while(true){
+    void run()
+    {
+        while (true)
+        {
             int choice;
-            do {
+            do
+            {
                 displayMenu();
                 cout << "\nEnter your choice: ";
                 choice = getch() - '0';
-                switch (choice) {
-                    case 1:
-                    {
-                        viewpostPage.display();
-                        break;
-                    }
-                    case 2:
-                    {
-                        createpostPage.display();
-                        break;
-                    }
-                    case 3:
-                    {
-                        editpostPage.display();
-                        break;
-                    }
-                    case 4:
-                    {
-                        deletepostPage.display();
-                        break;
-                    }
-                    case 5:
-                    {
-                        addcommentPage.display();
-                        break;
-                    }
-                    case 6:
-                    {
-                        addlikePage.display();
-                        break;
-                    }
-                    case 7:
-                    {
-                        yourinformationPage.display();
-                        break;
-                    }
-                    case 8:
-                    {
-                        return;
-                    }
-                    case 9:
-                    {
-                        Sleep(1000);
-                        exit(0);
-                    }
+                switch (choice)
+                {
+                case 1:
+                {
+                    viewpostPage.display();
+                    break;
+                }
+                case 2:
+                {
+                    createpostPage.display();
+                    break;
+                }
+                case 3:
+                {
+                    editpostPage.display();
+                    break;
+                }
+                case 4:
+                {
+                    deletepostPage.display();
+                    break;
+                }
+                case 5:
+                {
+                    addcommentPage.display();
+                    break;
+                }
+                case 6:
+                {
+                    addlikePage.display();
+                    break;
+                }
+                case 7:
+                {
+                    yourinformationPage.display();
+                    break;
+                }
+                case 8:
+                {
+                    return;
+                }
+                case 9:
+                {
+                    Sleep(1000);
+                    exit(0);
+                }
                 }
             } while (choice < 1 || choice > 9);
         }
     }
 };
 
-
-class LoginPage {
+class LoginPage
+{
 private:
     char username[USERNAME_SIZE], password[PASSWORD_SIZE];
     AccountDashboardPage accountdashboardpage;
+
 public:
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "\nUsername: ";
         cin.getline(username, sizeof(username));
@@ -358,14 +601,16 @@ public:
         cin.getline(password, sizeof(password));
 
         UserInfo userinfo;
-        
-        if(userinfo.isValidInfo(username, password)){
-            cout<<"\nLogin Successful"<<endl;
+
+        if (userinfo.isValidInfo(username, password))
+        {
+            cout << "\nLogin Successful" << endl;
             accountdashboardpage.setUserInfo(userinfo);
             accountdashboardpage.run();
         }
-        else{
-            cout<<"Login Not Successful"<<endl;
+        else
+        {
+            cout << "Login Not Successful" << endl;
             // showLoginNotSuccessfullPage();
         }
 
@@ -377,22 +622,62 @@ public:
     }
 };
 
-class SignupPage {
+class SignupPage
+{
+private:
+    UserInfo userinfo;
+
 public:
-    void display() {
-        UserInfo userinfo;
+    void display()
+    {
 
         userinfo.getData();
 
-        userinfo.storeInFile();
+        if (isUniqueUsername())
+        {
+            userinfo.storeInFile();
+        }
+        else
+        {
+            cout << "Username already exists" << endl;
+            system("pause");
+        }
+    }
 
+    bool isUniqueUsername()
+    {
+        bool isUnique = true;
+        fstream f;
+        f.open("usersinfo.dat", ios::binary | ios::in);
+
+        if (f)
+        {
+            UserInfo uinfo;
+            f.read(reinterpret_cast<char *>(&uinfo), sizeof(UserInfo));
+            while (f)
+            {
+                if (!strcmp(uinfo.get_username(), userinfo.get_username()))
+                {
+                    isUnique = false;
+                    break;
+                }
+                f.read(reinterpret_cast<char *>(&uinfo), sizeof(UserInfo));
+            }
+            f.close();
+            return isUnique;
+        }
+        else
+        {
+            cout << "\nError Opening File" << endl;
+        }
     }
 };
 
-
-class HelpPage {
+class HelpPage
+{
 public:
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "This is help Page" << endl;
         cout << "you can further reach us on whatsapp for help" << endl;
@@ -400,9 +685,11 @@ public:
     }
 };
 
-class AboutPage {
+class AboutPage
+{
 public:
-    void display() {
+    void display()
+    {
         system("cls");
         cout << "This is about Page" << endl;
         cout << "This software is created by Farhan, Sabih and Saad" << endl;
@@ -410,8 +697,8 @@ public:
     }
 };
 
-
-class SocializeApp {
+class SocializeApp
+{
 private:
     LoginPage loginPage;
     SignupPage signupPage;
@@ -420,60 +707,65 @@ private:
     UserInfo uinfo;
 
 public:
-    void displayMenu() {
+    void displayMenu()
+    {
         system("cls");
-        cout << "Welcome To Socialize" << endl << endl;
+        cout << "Welcome To Socialize" << endl
+             << endl;
         cout << "1. Login" << endl;
         cout << "2. Signup" << endl;
         cout << "3. Help" << endl;
         cout << "4. About" << endl;
-        cout << "5. Display All Users"<<endl;
+        cout << "5. Display All Users" << endl;
         cout << "6. Exit" << endl;
     }
 
-    void run() {
-        while(true){
+    void run()
+    {
+        while (true)
+        {
             int choice;
-            do {
+            do
+            {
                 displayMenu();
                 cout << "\nEnter your choice: ";
                 choice = getch() - '0';
-                switch (choice) {
-                    case 1:
-                    {
-                        loginPage.display();
-                        break;
-                    }
-                    case 2:
-                    {
-                        signupPage.display();
-                        break;
-                    }
-                    case 3:
-                    {
-                        helpPage.display();
-                        break;
-                    }
-                    case 4:
-                    {
-                        aboutPage.display();
-                        break;
-                    }
-                    case 5:
-                    {
-                        uinfo.displayAllUserInfo();
-                        break;
-                    }
-                    case 6:
-                    {
-                        Sleep(1000);
-                        exit(0);
-                    }
+                switch (choice)
+                {
+                case 1:
+                {
+                    loginPage.display();
+                    break;
+                }
+                case 2:
+                {
+                    signupPage.display();
+                    break;
+                }
+                case 3:
+                {
+                    helpPage.display();
+                    break;
+                }
+                case 4:
+                {
+                    aboutPage.display();
+                    break;
+                }
+                case 5:
+                {
+                    uinfo.displayAllUserInfo();
+                    break;
+                }
+                case 6:
+                {
+                    Sleep(1000);
+                    exit(0);
+                }
                 }
             } while (choice < 1 || choice > 6);
         }
     }
-
 };
 
 #endif
