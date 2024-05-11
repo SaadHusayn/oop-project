@@ -407,7 +407,6 @@ public:
     void addComment(){
         char uname[USERNAME_SIZE];
         strcpy(uname, username);
-        cout<<uname<<" "<<username<<endl;
         int id;
         cout << "Enter Post ID: ";
         fflush(stdin);
