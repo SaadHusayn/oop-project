@@ -233,6 +233,7 @@ public:
     }
 
     // getter and setters
+
     void setusername(const char *_username)
     {
         strncpy(username, _username, USERNAME_SIZE - 1);
@@ -352,7 +353,6 @@ public:
     {
         char uname[USERNAME_SIZE];
         strcpy(uname, username);
-        cout << uname << " " << username << endl;
         int id;
         cout << "Enter Post ID: ";
         fflush(stdin);
@@ -370,8 +370,6 @@ public:
                 f.read(reinterpret_cast<char *>(this), sizeof(Post));
                 while (f)
                 {
-                    cout << (post_ID == id) << " " << (!strcmp(uname, username)) << " " << uname << " " << username << endl;
-                    ;
                     if (post_ID == id && (!strcmp(uname, username)))
                     {
                         found = 1;
@@ -391,6 +389,176 @@ public:
                 else
                 {
                     cout << "File has been edited successfully" << endl;
+                }
+
+                system("pause");
+            }
+            else
+            {
+                cout << "\nError Opening File" << endl;
+            }
+        }
+        else
+        {
+            cout << "\nFILE not opened successfully" << endl;
+        }
+    }
+
+    void addComment(){
+        char uname[USERNAME_SIZE];
+        strcpy(uname, username);
+        cout<<uname<<" "<<username<<endl;
+        int id;
+        cout << "Enter Post ID: ";
+        fflush(stdin);
+        scanf("%d", &id);
+
+        fstream f;
+        f.open("posts.dat", ios::binary | ios::in);
+        if (f)
+        {
+            fstream ftemp;
+            ftemp.open("temp.dat", ios::binary | ios::out);
+            if (ftemp)
+            {
+                int found = 0;
+                f.read(reinterpret_cast<char *>(this), sizeof(Post));
+                while (f)
+                {
+                    if (post_ID == id && (!strcmp(uname, username)))
+                    {
+                        found = 1;
+                        char comment[COMMENT_SIZE];
+                        cout<<"\nEnter Comment:"<<endl;
+                        fflush(stdin);
+                        scanf("%[^\n]s", comment);
+
+                        comments[no_comments].setcontent(comment);
+                        comments[no_comments].setusername(uname);
+                        no_comments++;
+                        
+                    }
+                    ftemp.write(reinterpret_cast<char *>(this), sizeof(Post));
+                    f.read(reinterpret_cast<char *>(this), sizeof(Post));
+                }
+                f.close();
+                ftemp.close();
+                remove("posts.dat");
+                rename("temp.dat", "posts.dat");
+                if (!found)
+                {
+                    cout << "Error: Invalid ID" << endl;
+                }
+                else
+                {
+                    cout << "Comment has been added successfully" << endl;
+                }
+
+                system("pause");
+            }
+            else
+            {
+                cout << "\nError Opening File" << endl;
+            }
+        }
+        else
+        {
+            cout << "\nFILE not opened successfully" << endl;
+        }
+    }
+
+    void increaseLike(){
+        int id;
+        cout << "Enter Post ID: ";
+        fflush(stdin);
+        scanf("%d", &id);
+
+        fstream f;
+        f.open("posts.dat", ios::binary | ios::in);
+        if (f)
+        {
+            fstream ftemp;
+            ftemp.open("temp.dat", ios::binary | ios::out);
+            if (ftemp)
+            {
+                int found = 0;
+                f.read(reinterpret_cast<char *>(this), sizeof(Post));
+                while (f)
+                {
+                    if (post_ID == id)
+                    {
+                        found = 1;
+                        setno_likes(getno_likes() + 1);
+                    }
+                    ftemp.write(reinterpret_cast<char *>(this), sizeof(Post));
+                    f.read(reinterpret_cast<char *>(this), sizeof(Post));
+                }
+                f.close();
+                ftemp.close();
+                remove("posts.dat");
+                rename("temp.dat", "posts.dat");
+                if (!found)
+                {
+                    cout << "Error: Invalid ID" << endl;
+                }
+                else
+                {
+                    cout << "Like has been added successfully" << endl;
+                }
+
+                system("pause");
+            }
+            else
+            {
+                cout << "\nError Opening File" << endl;
+            }
+        }
+        else
+        {
+            cout << "\nFILE not opened successfully" << endl;
+        }
+    }
+
+    void deletePost(){
+        char uname[USERNAME_SIZE];
+        strcpy(uname, username);
+        int id;
+        cout << "Enter Post ID: ";
+        fflush(stdin);
+        scanf("%d", &id);
+
+        fstream f;
+        f.open("posts.dat", ios::binary | ios::in);
+        if (f)
+        {
+            fstream ftemp;
+            ftemp.open("temp.dat", ios::binary | ios::out);
+            if (ftemp)
+            {
+                int found = 0;
+                f.read(reinterpret_cast<char *>(this), sizeof(Post));
+                while (f)
+                {
+                    if (post_ID == id && (!strcmp(uname, username)))
+                    {
+                        found = 1;
+                        f.read(reinterpret_cast<char *>(this), sizeof(Post));
+                        continue;
+                    }
+                    ftemp.write(reinterpret_cast<char *>(this), sizeof(Post));
+                    f.read(reinterpret_cast<char *>(this), sizeof(Post));
+                }
+                f.close();
+                ftemp.close();
+                remove("posts.dat");
+                rename("temp.dat", "posts.dat");
+                if (!found)
+                {
+                    cout << "Error: Invalid ID, Or ID of other User" << endl;
+                }
+                else
+                {
+                    cout << "Post has been deleted successfully" << endl;
                 }
 
                 system("pause");
@@ -510,17 +678,19 @@ class DeletePostPage
 
 private:
     UserInfo userinfo;
+    Post post;
 
 public:
     void setUserInfo(UserInfo uinfo)
     {
         userinfo = uinfo;
+        post.setusername(userinfo.get_username());
     }
     void display()
     {
         system("cls");
         cout << "This is This is Delete Post Page of The User" << endl;
-        cout << "we are still working on it" << endl;
+        post.deletePost();
         system("pause");
     }
 };
@@ -529,17 +699,19 @@ class AddCommentPage
 {
 private:
     UserInfo userinfo;
+    Post post;
 
 public:
     void setUserInfo(UserInfo uinfo)
     {
         userinfo = uinfo;
+        post.setusername(userinfo.get_username());
     }
     void display()
     {
         system("cls");
         cout << "This is This is Add Comments Page of The User" << endl;
-        cout << "we are still working on it" << endl;
+        post.addComment();
         system("pause");
     }
 };
@@ -548,6 +720,7 @@ class AddLikePage
 {
 private:
     UserInfo userinfo;
+    Post post;
 
 public:
     void setUserInfo(UserInfo uinfo)
@@ -558,7 +731,7 @@ public:
     {
         system("cls");
         cout << "This is This is Add Like Page of The User" << endl;
-        cout << "we are still working on it" << endl;
+        post.increaseLike();
         system("pause");
     }
 };
