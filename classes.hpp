@@ -196,21 +196,24 @@ private:
     char username[USERNAME_SIZE];
 
 public:
-    Comment() {}
+    Comment() {
+        strcpy(content, "");
+        strcpy(username, "");
+    }
 
     void setusername(const char *_username)
     {
         strncpy(username, _username, USERNAME_SIZE - 1);
         username[USERNAME_SIZE - 1] = '\0';
     }
-    const char *getusername(char *_username) { return username; }
+    const char *getusername() { return username; }
 
     void setcontent(const char *_content)
     {
         strncpy(content, _content, CONTENT_SIZE - 1);
         content[CONTENT_SIZE - 1] = '\0';
     }
-    const char *getcontent(char *_content) { return content; }
+    const char *getcontent() { return content; }
 };
 class Post
 {
@@ -296,13 +299,10 @@ public:
         if (no_comments)
         {
             cout << "Comments:" << endl;
-            char uname[USERNAME_SIZE], comment[COMMENT_SIZE];
             for (int i = 0; i < no_comments; i++)
             {
-                comments[i].getusername(uname);
-                comments[i].getcontent(comment);
-                cout << "\nUsername: " << uname << endl;
-                cout << "Comment: " << comment << endl;
+                cout << "\nUsername: " << comments[i].getusername() << endl;
+                cout << "Comment: " << comments[i].getcontent()<< endl;
             }
         }
         else
