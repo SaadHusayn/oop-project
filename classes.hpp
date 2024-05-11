@@ -2,6 +2,9 @@
 #define CLASSES_H
 
 #include <iostream>
+#include<ios>
+#include<cstdio>
+#include<limits>
 #include <windows.h>
 #include <conio.h>
 #include <stdlib.h>
@@ -84,25 +87,32 @@ public:
         system("cls");
 
         cout << "\nEnter Full Name: " << endl;
-        cin.getline(full_name, FULL_NAME_SIZE);
+        fflush(stdin);
+        scanf("%[^\n]s", full_name);
 
         cout << "Enter Username: " << endl;
-        cin.getline(username, USERNAME_SIZE);
+        fflush(stdin);
+        scanf("%[^\n]s", username);
 
         cout << "Enter Password: " << endl;
-        cin.getline(password, PASSWORD_SIZE);
+        fflush(stdin);
+        scanf("%[^\n]s", password);
 
         cout << "Enter Date Of Birth: " << endl;
-        cin.getline(date_of_birth, DATE_OF_BIRTH_SIZE);
+        fflush(stdin);
+        scanf("%[^\n]s", date_of_birth);
 
         cout << "Enter Gender: " << endl;
-        cin.getline(gender, GENDER_SIZE);
+        fflush(stdin);
+        scanf("%[^\n]s", gender);
 
         cout << "Enter Description/Bio: " << endl;
-        cin.getline(description, DESCRIPTION_SIZE);
+        fflush(stdin);
+        scanf("%[^\n]s", description);
 
         cout << "Security Question: What is your favourite athelete?" << endl;
-        cin.getline(security_question, SECURITY_QUESTION_SIZE);
+        fflush(stdin);
+        scanf("%[^\n]s", security_question);
     }
 
     void storeInFile()
@@ -193,14 +203,14 @@ public:
         strncpy(username, _username, USERNAME_SIZE - 1);
         username[USERNAME_SIZE - 1] = '\0';
     }
-    const char *getusername(char *_username) { strcpy(_username, username); }
+    const char *getusername(char *_username) { return username; }
 
     void setcontent(const char *_content)
     {
         strncpy(content, _content, CONTENT_SIZE - 1);
         content[CONTENT_SIZE - 1] = '\0';
     }
-    const char *getcontent(char *_content) { strcpy(_content, content); }
+    const char *getcontent(char *_content) { return content; }
 };
 class Post
 {
@@ -228,21 +238,21 @@ public:
         strncpy(username, _username, USERNAME_SIZE - 1);
         username[USERNAME_SIZE - 1] = '\0';
     }
-    const char *getusername(char *_username) { strcpy(_username, username); }
+    const char *getusername(char *_username) { return username; }
 
     void settitle(const char *_title)
     {
         strncpy(title, _title, TITLE_SIZE - 1);
         title[TITLE_SIZE - 1] = '\0';
     }
-    const char *gettitle(char *_title) { strcpy(_title, title); }
+    const char *gettitle(char *_title) { return title; }
 
     void setcontent(const char *_content)
     {
         strncpy(content, _content, CONTENT_SIZE - 1);
         content[CONTENT_SIZE - 1] = '\0';
     }
-    const char *getcontent(char *_content) { strcpy(_content, content); }
+    const char *getcontent(char *_content) { return content; }
 
     void setno_comments(int _no_comments) { no_comments = _no_comments; }
     int getno_comments() { return no_comments; }
@@ -255,15 +265,19 @@ public:
 
     void getPostData()
     {
-        cout << "Enter Post ID: " << endl;
-        cin >> post_ID;
 
-        cin.ignore();
+        cout << "Enter Post ID: " << endl;
+        fflush(stdin);
+        scanf("%d", &post_ID);
+
 
         cout << "\nEnter Post Title: " << endl;
-        cin.getline(title, TITLE_SIZE);
+        fflush(stdin);
+        scanf("%[^\n]s", title);
 
         string s;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "\nEnter Post Content: (Enter + Ctrl-Z) to Exit" << endl;
         getline(cin, s, static_cast<char>(EOF));
 
@@ -277,6 +291,7 @@ public:
         cout << "Post Title: " << title << endl;
         cout << "Post Content: " << "\n"
              << content;
+        cout << "Likes: " << no_likes <<endl;
         if (no_comments)
         {
             cout << "Comments:" << endl;
@@ -333,6 +348,63 @@ public:
             cout << "\nError Opening File" << endl;
         }
     }
+    void editPost()
+    {
+        char uname[USERNAME_SIZE];
+        strcpy(uname, username);
+        cout << uname << " " << username << endl;
+        int id;
+        cout << "Enter Post ID: ";
+        fflush(stdin);
+        scanf("%d", &id);
+
+        fstream f;
+        f.open("posts.dat", ios::binary | ios::in);
+        if (f)
+        {
+            fstream ftemp;
+            ftemp.open("temp.dat", ios::binary | ios::out);
+            if (ftemp)
+            {
+                int found = 0;
+                f.read(reinterpret_cast<char *>(this), sizeof(Post));
+                while (f)
+                {
+                    cout << (post_ID == id) << " " << (!strcmp(uname, username)) << " " << uname << " " << username << endl;
+                    ;
+                    if (post_ID == id && (!strcmp(uname, username)))
+                    {
+                        found = 1;
+                        this->getPostData();
+                    }
+                    ftemp.write(reinterpret_cast<char *>(this), sizeof(Post));
+                    f.read(reinterpret_cast<char *>(this), sizeof(Post));
+                }
+                f.close();
+                ftemp.close();
+                remove("posts.dat");
+                rename("temp.dat", "posts.dat");
+                if (!found)
+                {
+                    cout << "Error: Invalid ID, Or ID of other User" << endl;
+                }
+                else
+                {
+                    cout << "File has been edited successfully" << endl;
+                }
+
+                system("pause");
+            }
+            else
+            {
+                cout << "\nError Opening File" << endl;
+            }
+        }
+        else
+        {
+            cout << "\nFILE not opened successfully" << endl;
+        }
+    }
 };
 
 class ViewPostPage
@@ -365,7 +437,7 @@ public:
     void setUserInfo(UserInfo uinfo)
     {
         userinfo = uinfo;
-        post.setusername(uinfo.get_username());
+        post.setusername(userinfo.get_username());
     }
     void display()
     {
@@ -373,9 +445,41 @@ public:
         cout << "This is This is Create Post Page of The User" << endl;
         post.getPostData();
 
-        post.storeInFile();
+        if (isUniqueID())
+        {
+            post.storeInFile();
+        }
+        else
+        {
+            cout << "Post Not created!!\nPost ID should be unique" << endl;
+            system("pause");
+        }
 
         system("pause");
+    }
+
+    bool isUniqueID()
+    {
+        bool isUnique = true;
+        fstream f;
+        f.open("posts.dat", ios::binary | ios::in);
+
+        if (f)
+        {
+            Post p;
+            f.read(reinterpret_cast<char *>(&p), sizeof(Post));
+            while (f)
+            {
+                if (p.getpost_ID() == post.getpost_ID())
+                {
+                    isUnique = false;
+                    break;
+                }
+                f.read(reinterpret_cast<char *>(&p), sizeof(Post));
+            }
+            f.close();
+            return isUnique;
+        }
     }
 };
 
@@ -384,17 +488,19 @@ class EditPostPage
 
 private:
     UserInfo userinfo;
+    Post post;
 
 public:
     void setUserInfo(UserInfo uinfo)
     {
         userinfo = uinfo;
+        post.setusername(userinfo.get_username());
     }
     void display()
     {
         system("cls");
         cout << "This is This is Edit Post Page of The User" << endl;
-        cout << "we are still working on it" << endl;
+        post.editPost();
         system("pause");
     }
 };
@@ -596,9 +702,11 @@ public:
     {
         system("cls");
         cout << "\nUsername: ";
-        cin.getline(username, sizeof(username));
+        fflush(stdin);
+        scanf("%[^\n]s", username);
         cout << "Password: ";
-        cin.getline(password, sizeof(password));
+        fflush(stdin);
+        scanf("%[^\n]s", password);
 
         UserInfo userinfo;
 
@@ -611,14 +719,9 @@ public:
         else
         {
             cout << "Login Not Successful" << endl;
-            // showLoginNotSuccessfullPage();
         }
 
         system("pause");
-
-        // userinfo.readFromFile();
-
-        // userinfo.displayUserInfo();
     }
 };
 
