@@ -2,9 +2,9 @@
 #define CLASSES_H
 
 #include <iostream>
-#include <ios>
-#include <cstdio>
-#include <limits>
+#include<ios>
+#include<cstdio>
+#include<limits>
 #include <windows.h>
 #include <conio.h>
 #include <stdlib.h>
@@ -25,6 +25,17 @@ using namespace std;
 #define MAX_COMMENTS 50
 #define COMMENT_SIZE 50
 #define TITLE_SIZE 50
+
+void loading() {
+    system("cls");
+        cout << "\n\n\n\n\n\n";
+        cout <<string(30, '-') << "Socialize: Where Every Connection Counts." <<string(30, '-') <<endl;
+        cout << "\nLoading." ;
+        for(int i = 0; i < 10; i++) {
+            Sleep(100);
+            cout << ".";
+        }
+}
 
 class UserInfo
 {
@@ -87,7 +98,9 @@ public:
     void getData()
     {
         system("cls");
-
+        cout << '|' <<string(40, '-') <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<"Signup Page " <<"*" <<setw(40- (strlen("Signup Post Page "))) <<'|' <<endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
         cout << "\nEnter Full Name: " << endl;
         fflush(stdin);
         scanf("%[^\n]s", full_name);
@@ -115,6 +128,7 @@ public:
         cout << "Security Question: What is your favourite athelete?" << endl;
         fflush(stdin);
         scanf("%[^\n]s", security_question);
+        cout << '|' <<string(40, '-') <<'|' <<endl;
     }
 
     void storeInFile()
@@ -158,33 +172,24 @@ public:
     void displayUserInfo()
     {
 
-        system("cls");
-        const int totalWidth = 62; // Adjust according to your console width
+         system("cls");
+        const int totalWidth = 62;
         const int colWidth = 20;
+        
+        cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
+        cout << setw(colWidth-9) << '|' << setw(16) << '*' << "User Info" << '*' <<setw((totalWidth-(strlen("User Info"))-16)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
-        cout << setw(colWidth - 9) << '+' << string(totalWidth, '-') << '+' << endl;
-        cout << setw(colWidth - 9) << '|' << setw(16) << '*' << "User Info" << '*' << setw((totalWidth - (strlen("User Info")) - 16)) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << string(totalWidth, '-') << '|' << endl;
+        cout << setw(colWidth-9) << '|' << "Name: " << full_name <<setw((totalWidth+1)-((strlen("Name: ")) + (strlen(full_name)))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "Username: " << username <<setw((totalWidth+1)-((strlen("Username: ")) + (strlen(username))))  << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "Date Of Birth: " << date_of_birth <<setw((totalWidth+1)-((strlen("Date Of Birth: ")) + (strlen(date_of_birth)))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "Gender: " << gender <<setw((totalWidth+1)-((strlen("Gender: ")) + (strlen(gender)))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "Description/Bio: " << description <<setw((totalWidth+1)-((strlen("Description/Bio: ")) + (strlen(description)))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "Favourite Athele: " << security_question <<setw((totalWidth+1)-((strlen("Favourite Athele: ")) + (strlen(security_question)))) << '|'<< endl;
 
-        cout << setw(colWidth - 9) << '|' << "Name: " << full_name << setw((totalWidth + 1) - ((strlen("Name: ")) + (strlen(full_name)))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "Username: " << username << setw((totalWidth + 1) - ((strlen("Username: ")) + (strlen(username)))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "Date Of Birth: " << date_of_birth << setw((totalWidth + 1) - ((strlen("Date Of Birth: ")) + (strlen(date_of_birth)))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "Gender: " << gender << setw((totalWidth + 1) - ((strlen("Gender: ")) + (strlen(gender)))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "Description/Bio: " << description << setw((totalWidth + 1) - ((strlen("Description/Bio: ")) + (strlen(description)))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "Favourite Athele: " << security_question << setw((totalWidth + 1) - ((strlen("Favourite Athele: ")) + (strlen(security_question)))) << '|' << endl;
-
-        cout << setw(colWidth - 9) << '+' << string(totalWidth, '-') << '+' << endl;
+        cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
 
         system("pause");
-
-        // cout << "\nName: " << full_name << endl;
-        // cout << "Username: " << username << endl;
-        // cout << "Date Of Birth: " << date_of_birth << endl;
-        // cout << "Gender: " << gender << endl;
-        // cout << "Description/Bio: " << description << endl;
-        // cout << "Favourite Athele: " << security_question << endl;
-
-        // system("pause");
     }
 
     bool isValidInfo(char _username[], char _password[])
@@ -218,8 +223,7 @@ private:
     char username[USERNAME_SIZE];
 
 public:
-    Comment()
-    {
+    Comment() {
         strcpy(content, "");
         strcpy(username, "");
     }
@@ -308,52 +312,41 @@ public:
         getline(cin, s, static_cast<char>(EOF));
 
         strcpy(content, s.c_str());
+        cout << '|' <<string(40, '-') <<'|' <<endl;
+
     }
 
     void displayPostData()
     {
-
-        const int totalWidth = 62; // Adjust according to your console width
+        const int totalWidth = 62;
         const int colWidth = 20;
+        
+        cout << string(totalWidth, '-') <<endl;
+        cout << "Post ID: " << post_ID <<endl; 
+        cout << "UserName: " << username <<endl; 
+        cout << "Post Title: " << title <<endl; 
+        cout <<endl;
+        cout <<string(4, '-') << "Post Content" <<string(4, '-') <<endl;
+        cout << content <<endl;
 
-        cout << string(totalWidth, '-') << endl;
-        cout << "Post ID: " << post_ID << endl; //<<setw((totalWidth+1)-((strlen("Post ID: ")) + (sizeof(post_ID)/sizeof(int)))) << '|'<< endl;
-        // cout << setw(colWidth-9) << string(totalWidth, '-') <<endl;
-        cout << "UserName: " << username << endl; //<<setw((totalWidth+1)-((strlen("Post ID: ")) + (strlen(username)))) << '|'<< endl;
-        // cout << setw(colWidth-9) << string(totalWidth, '-') <<endl;
-        cout << "Post Title: " << title << endl; //<<setw((totalWidth+1)-((strlen("Post Title: ")) + (strlen(title)))) << '|'<< endl;
-        // cout << setw(colWidth-9) << string(totalWidth, '-') <<endl;
-        cout << endl;
-        cout << string(4, '-') << "Post Content" << string(4, '-') << endl; //<<setw((totalWidth+1)-((strlen("Post Title: ")))) << '|'<< endl;
-        cout << content << endl;
-
-        // cout << "\nPost ID: " << post_ID << endl;
-        // cout << "UserName: " << username << endl;
-        // cout << "Post Title: " << title << endl;
-        // cout << "Post Content: " << "\n"
-        //      << content;
-
-        cout << "Likes: " << no_likes << endl
-             << endl;
+        cout << "LIKES: " << no_likes <<endl <<endl;
         if (no_comments)
         {
-            cout << "    COMMENTS    " << endl;
+            cout << "COMMENTS: " << endl;
             for (int i = 0; i < no_comments; i++)
             {
                 // cout << "Username: " << comments[i].getusername() << endl;
                 // cout << "Comment: " << comments[i].getcontent()<< endl;
-                cout << comments[i].getusername() << ": " << comments[i].getcontent() << endl;
-                // cout << "Comment: " << comments[i].getcontent()<< endl;
+                cout <<comments[i].getusername() <<": " << comments[i].getcontent() << endl;
+                //cout << "Comment: " << comments[i].getcontent()<< endl;
             }
-            cout << string(totalWidth, '-');
         }
         else
         {
             cout << "(No Comments for this post)" << endl;
-            cout << string(totalWidth, '-') << endl;
         }
-        cout << endl
-             << endl;
+        cout << string(totalWidth, '-') <<endl;
+        cout <<endl <<endl;
     }
 
     void displayAllPostData()
@@ -435,7 +428,6 @@ public:
                 {
                     cout << "File has been edited successfully" << endl;
                 }
-
                 system("pause");
             }
             else
@@ -449,8 +441,7 @@ public:
         }
     }
 
-    void addComment()
-    {
+    void addComment(){
         char uname[USERNAME_SIZE];
         strcpy(uname, username);
         int id;
@@ -470,17 +461,18 @@ public:
                 f.read(reinterpret_cast<char *>(this), sizeof(Post));
                 while (f)
                 {
-                    if (post_ID == id && (!strcmp(uname, username)))
+                    if (post_ID == id)
                     {
                         found = 1;
                         char comment[COMMENT_SIZE];
-                        cout << "\nEnter Comment:" << endl;
+                        cout<<"\nEnter Comment:"<<endl;
                         fflush(stdin);
                         scanf("%[^\n]s", comment);
 
                         comments[no_comments].setcontent(comment);
                         comments[no_comments].setusername(uname);
                         no_comments++;
+                        
                     }
                     ftemp.write(reinterpret_cast<char *>(this), sizeof(Post));
                     f.read(reinterpret_cast<char *>(this), sizeof(Post));
@@ -497,7 +489,7 @@ public:
                 {
                     cout << "Comment has been added successfully" << endl;
                 }
-
+                cout << '|' <<string(40, '-') <<'|' <<endl;
                 system("pause");
             }
             else
@@ -511,8 +503,7 @@ public:
         }
     }
 
-    void increaseLike()
-    {
+    void increaseLike(){
         int id;
         cout << "Enter Post ID: ";
         fflush(stdin);
@@ -550,7 +541,7 @@ public:
                 {
                     cout << "Like has been added successfully" << endl;
                 }
-
+                cout << '|' <<string(40, '-') <<'|' <<endl;
                 system("pause");
             }
             else
@@ -564,8 +555,7 @@ public:
         }
     }
 
-    void deletePost()
-    {
+    void deletePost(){
         char uname[USERNAME_SIZE];
         strcpy(uname, username);
         int id;
@@ -606,6 +596,7 @@ public:
                 {
                     cout << "Post has been deleted successfully" << endl;
                 }
+                 cout << '|' <<string(40, '-') <<'|' <<endl;
 
                 system("pause");
             }
@@ -639,19 +630,14 @@ public:
 
         const int totalWidth = 62;
         const int colWidth = 20;
+        
+        cout << '+' << string(totalWidth, '-') << '+' <<endl;
+        cout << '|' << setw(16) <<'*' << "VIEW POST PAGE" <<'*' <<setw((totalWidth-(strlen("VIEW POST PAGE"))-16)) << '|'<< endl;
+        cout << setw(colWidth-9) << string(totalWidth, '-') <<endl;
 
-        cout << '+' << string(totalWidth, '-') << '+' << endl;
-        cout << '|' << setw(16) << '*' << "VIEW POST PAGE" << '*' << setw((totalWidth - (strlen("VIEW POST PAGE")) - 16)) << '|' << endl;
-        cout << setw(colWidth - 9) << string(totalWidth, '-') << endl;
-
-        // cout << "This is This is View Post Page of The User" << endl;
+        cout << "This is the View Post Page of The User." << endl;
         post.displayAllPostData();
         system("pause");
-
-        // system("cls");
-        // cout << "This is This is View Post Page of The User" << endl;
-        // post.displayAllPostData();
-        // system("pause");
     }
 };
 
@@ -670,7 +656,9 @@ public:
     void display()
     {
         system("cls");
-        cout << "This is This is Create Post Page of The User" << endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<"Create Post Page " <<"*" <<setw(40- (strlen("Create Post Page      "))) <<'|' <<endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
         post.getPostData();
 
         if (isUniqueID())
@@ -679,10 +667,12 @@ public:
         }
         else
         {
-            cout << "Post Not created!!\nPost ID should be unique" << endl;
+            cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
+            cout <<setw(10) <<'|' << "Post Not created!! " <<setw(40- strlen("Post Not created!!")) <<'|' << endl;
+            cout <<setw(10) <<'|' << "Post ID should be unique " <<setw(40- strlen("Post ID should be unique")) <<'|' << endl;
+            cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
             system("pause");
         }
-
         system("pause");
     }
 
@@ -727,7 +717,10 @@ public:
     void display()
     {
         system("cls");
-        cout << "This is This is Edit Post Page of The User" << endl;
+        // cout << "This is This is Edit Post Page of The User" << endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<"Edit Post Page " <<"*" <<setw(40- (strlen("Edit Post Page      "))) <<'|' <<endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
         post.editPost();
         system("pause");
     }
@@ -749,7 +742,10 @@ public:
     void display()
     {
         system("cls");
-        cout << "This is This is Delete Post Page of The User" << endl;
+        // cout << "This is This is Delete Post Page of The User" << endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<"Delete Post Page " <<"*" <<setw(40- (strlen("Delete Post Page      "))) <<'|' <<endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
         post.deletePost();
         system("pause");
     }
@@ -770,7 +766,10 @@ public:
     void display()
     {
         system("cls");
-        cout << "This is This is Add Comments Page of The User" << endl;
+        // cout << "This is This is Add Comments Page of The User" << endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<"Add Comment Page " <<"*" <<setw(40- (strlen("Add Comment Page      "))) <<'|' <<endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
         post.addComment();
         system("pause");
     }
@@ -790,7 +789,10 @@ public:
     void display()
     {
         system("cls");
-        cout << "This is This is Add Like Page of The User" << endl;
+        //cout << "This is This is Add Like Page of The User" << endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<"Add Like Page " <<"*" <<setw(40- (strlen("Add Like Page      "))) <<'|' <<endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
         post.increaseLike();
         system("pause");
     }
@@ -846,42 +848,28 @@ public:
 
     void displayMenu()
     {
-
         system("cls");
 
         const int totalWidth = 62;
         const int colWidth = 20;
+        
+        cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
+        cout << setw(colWidth-9) << '|' << setw(16) <<'*' << "----" << "SOCIALIZE" << "----" <<'*' <<setw((totalWidth-(strlen("SOCIALIZE"))-24)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
+        cout << setw(colWidth-9) << '|' << setw(16) << '*' << "Account DashBoard For " << '*' <<setw((totalWidth-(strlen("Account DashBoard For "))-16)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
-        cout << setw(colWidth - 9) << '+' << string(totalWidth, '-') << '+' << endl;
-        cout << setw(colWidth - 9) << '|' << setw(16) << '*' << "----" << "SOCIALIZE" << "----" << '*' << setw((totalWidth - (strlen("SOCIALIZE")) - 24)) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << string(totalWidth, '-') << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << setw(16) << '*' << "Account DashBoard For " << '*' << setw((totalWidth - (strlen("Account DashBoard For ")) - 16)) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << string(totalWidth, '-') << '|' << endl;
+        cout << setw(colWidth-9) << '|' << "1. View All Posts" <<setw((totalWidth+1)-(strlen("1. View All Posts"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "2. Create Post" <<setw((totalWidth+1)-(strlen("2. Create Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "3. Edit Post" <<setw((totalWidth+1)-(strlen("3. Edit Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "4. Delete Post" <<setw((totalWidth+1)-(strlen("4. Delete Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "5. Add Comment To Post" <<setw((totalWidth+1)-(strlen("5. Add Comment To Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "6. Add Like To Post" <<setw((totalWidth+1)-(strlen("6. Add Like To Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "7. View Your Information" <<setw((totalWidth+1)-(strlen("7. View Your Information"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "8. Logout Account" <<setw((totalWidth+1)-(strlen("8. Logout Account"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "9. Exit" <<setw((totalWidth+1)-(strlen("9. Exit"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
-        cout << setw(colWidth - 9) << '|' << "1. View All Posts" << setw((totalWidth + 1) - (strlen("1. View All Posts"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "2. Create Post" << setw((totalWidth + 1) - (strlen("2. Create Post"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "3. Edit Post" << setw((totalWidth + 1) - (strlen("3. Edit Post"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "4. Delete Post" << setw((totalWidth + 1) - (strlen("4. Delete Post"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "5. Add Comment To Post" << setw((totalWidth + 1) - (strlen("5. Add Comment To Post"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "6. Add Like To Post" << setw((totalWidth + 1) - (strlen("6. Add Like To Post"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "7. View Your Information" << setw((totalWidth + 1) - (strlen("7. View Your Information"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "8. Logout Account" << setw((totalWidth + 1) - (strlen("8. Logout Account"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "9. Exit" << setw((totalWidth + 1) - (strlen("9. Exit"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << string(totalWidth, '-') << '|' << endl;
-
-        // system("cls");
-        // cout << "Welcome To Socialize" << endl;
-        // cout << "Account DashBoard For " << endl
-        //      << endl;
-        // cout << "1. View All Posts" << endl;
-        // cout << "2. Create Post" << endl;
-        // cout << "3. Edit Post" << endl;
-        // cout << "4. Delete Post" << endl;
-        // cout << "5. Add Comment To Post" << endl;
-        // cout << "6. Add Like To Post" << endl;
-        // cout << "7. View Your Information" << endl;
-        // cout << "8. Logout Account" << endl;
-        // cout << "9. Exit" << endl;
     }
 
     void run()
@@ -898,41 +886,58 @@ public:
                 {
                 case 1:
                 {
+                    loading();
                     viewpostPage.display();
                     break;
                 }
                 case 2:
                 {
+                    loading();
                     createpostPage.display();
                     break;
                 }
                 case 3:
                 {
+                    loading();
                     editpostPage.display();
                     break;
                 }
                 case 4:
                 {
+                    loading();
                     deletepostPage.display();
                     break;
                 }
                 case 5:
                 {
+                    loading();
                     addcommentPage.display();
                     break;
                 }
                 case 6:
                 {
+                    loading();
                     addlikePage.display();
                     break;
                 }
                 case 7:
                 {
+                    loading();
                     yourinformationPage.display();
                     break;
                 }
                 case 8:
                 {
+                    loading();
+                    // system("cls");
+                    // cout << "\n\n\n\n\n\n";
+                    // cout <<string(30, '-') << "Socialize: Where Every Connection Counts." <<string(30, '-') <<endl;
+                    // cout << "\nLogging out." ;
+                    // for(int i = 0; i < 10; i++) {
+                    //     Sleep(100);
+                    //     cout << ".";
+                    // }
+                    cout << endl;
                     return;
                 }
                 case 9:
@@ -956,24 +961,45 @@ public:
     void display()
     {
         system("cls");
+        cout << '|' <<string(40, '-') <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<"Login Page " <<"*" <<setw(40- (strlen("login Post Page "))) <<'|' <<endl;
+        cout << '|' <<string(40, '-') <<'|' <<endl;
         cout << "\nUsername: ";
         fflush(stdin);
         scanf("%[^\n]s", username);
         cout << "Password: ";
         fflush(stdin);
         scanf("%[^\n]s", password);
+        cout << '|' <<string(40, '-') <<'|' <<endl;
+
 
         UserInfo userinfo;
 
         if (userinfo.isValidInfo(username, password))
         {
-            cout << "\nLogin Successful" << endl;
+            system("cls");
+            cout << "\n\n\n\n\n\n";
+            cout <<string(30, '-') << "Socialize: Where Every Connection Counts." <<string(30, '-') <<endl;
+            cout << "\nLoading." ;
+            for(int i = 0; i < 5; i++) {
+                Sleep(100);
+                cout << ".";
+            }
+            cout << "\n\n" << "Login Successful." ;
+            for(int i = 0; i < 5; i++) {
+                Sleep(100);
+                cout << ".";
+            }
             accountdashboardpage.setUserInfo(userinfo);
             accountdashboardpage.run();
         }
         else
         {
-            cout << "Login Not Successful" << endl;
+            cout <<'|' <<string(40,'-') << '|' <<endl;
+            cout <<'|' << "Login Failed " <<setw(40- strlen("Login Failed")) <<'|' << endl;
+            cout <<'|' << "Incorrect username or password " <<setw(40- strlen("Incorrect username or password")) <<'|'  <<endl;
+            cout <<'|'<< "Try Again. " <<setw(40- strlen("Try Again.")) <<'|' <<endl;
+            cout <<'|' <<string(40,'-') << '|' <<endl;
         }
 
         system("pause");
@@ -997,7 +1023,9 @@ public:
         }
         else
         {
-            cout << "Username already exists" << endl;
+            cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
+            cout <<setw(10) <<'|' << "Username already exists " <<setw(40- strlen("Username already exists")) <<'|' << endl;
+            cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
             system("pause");
         }
     }
@@ -1039,22 +1067,18 @@ public:
 
         system("cls");
 
-        const int totalWidth = 62; // Adjust according to your console width
+        const int totalWidth = 62; 
         const int colWidth = 20;
 
-        cout << setw(colWidth - 9) << '+' << string(totalWidth, '-') << '+' << endl;
-        cout << setw(colWidth - 9) << '|' << setw(16) << '*' << "HELP" << '*' << setw((totalWidth - (strnlen("HELP", 100)) - 16)) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << string(totalWidth, '-') << '|' << endl;
+        cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
+        cout << setw(colWidth-9) << '|' << setw(25) << '*' << "HELP" << '*' <<setw((totalWidth-(strnlen("HELP",100))-25)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
-        cout << setw(colWidth - 9) << '|' << "You can further reach us on whatsapp for help" << setw((totalWidth + 1) - (strnlen("You can further reach us on whatsapp for help", 100))) << '|' << endl;
-        cout << setw(colWidth - 9) << '+' << string(totalWidth, '-') << '+' << endl;
+        cout << setw(colWidth-9) << '|' << "You can further reach us on whatsapp for help or email us for " <<setw((totalWidth+1)-(strlen("You can further reach us on whatsapp for help or email us for "))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "any query at socialize.team@gamil.com " <<setw((totalWidth+1)-(strlen("any query at socialize.team@gamil.com "))) << '|'<< endl;
+        cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
 
         system("pause");
-
-        // system("cls");
-        // cout << "This is help Page" << endl;
-        // cout << "you can further reach us on whatsapp for help" << endl;
-        // system("pause");
     }
 };
 
@@ -1063,24 +1087,24 @@ class AboutPage
 public:
     void display()
     {
-
         system("cls");
-        const int totalWidth = 62; // Adjust according to your console width
-        const int colWidth = 20;
+        const int totalWidth = 62;
+        const int colWidth = 25;
+        
+        cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
+        cout << setw(colWidth-9) << '|' << setw(22) << '*' << "About Page" << '*' <<setw((totalWidth-(strlen("About Page"))-22)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
-        cout << setw(colWidth - 9) << '+' << string(totalWidth, '-') << '+' << endl;
-        cout << setw(colWidth - 9) << '|' << setw(16) << '*' << "About Page" << '*' << setw((totalWidth - (strnlen("About Page", 100)) - 16)) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << string(totalWidth, '-') << '|' << endl;
+        cout << setw(colWidth-9) << '|' << "Socialize is a platform where you can create posts, like, " <<setw((totalWidth+1)-(strlen("Socialize is a platform where you can create posts, like, "))) << '|' <<endl;
+        cout << setw(colWidth-9) << '|' << "comment, and connect with others in a friendly community" <<setw((totalWidth+1)-(strlen("comment, and connect with others in a friendly community"))) << '|' <<endl;
+        cout << setw(colWidth-9) << '|' << setw(totalWidth+1) << '|' <<endl;
+        cout << setw(colWidth-9) << '|' << setw(totalWidth+1) << '|' <<endl;
 
-        cout << setw(colWidth - 9) << '|' << "This software is created by Farhan, Sabih and Saad" << setw((totalWidth + 1) - (strnlen("This software is created by Farhan, Sabih and Saad", 100))) << '|' << endl;
-        cout << setw(colWidth - 9) << '+' << string(totalWidth, '-') << '+' << endl;
-
+        cout << setw(colWidth-9) << '|' << "Created by Farhan, Sabih and Saad" <<setw((totalWidth+1)-(strlen("Created by Farhan, Sabih and Saad"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<setw(totalWidth+1) <<right << "Version 1.0|" <<endl; //<<setw((totalWidth+1)-(strlen("Created by Farhan, Sabih and Saad"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
+        
         system("pause");
-
-        // system("cls");
-        // cout << "This is about Page" << endl;
-        // cout << "This software is created by Farhan, Sabih and Saad" << endl;
-        // system("pause");
     }
 };
 
@@ -1098,34 +1122,27 @@ public:
     {
 
         system("cls");
-        const int totalWidth = 62; // Adjust according to your console width
+        const int totalWidth = 62;
         const int colWidth = 20;
+        
+        cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
+        cout << setw(colWidth-9) << '|' << setw(16) << '*' << "Welcome To Socialize" << '*' <<setw((totalWidth-(strlen("Welcome To Socialize"))-16)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
+             //<< endl;
+        cout << setw(colWidth-9) << '|' << "1. Login" <<setw((totalWidth+1)-(strlen("1. Login"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "2. Signup" <<setw((totalWidth+1)-(strlen("2. Signup"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "3. Help" <<setw((totalWidth+1)-(strlen("3. Help"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "4. About" <<setw((totalWidth+1)-(strlen("4. About"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "5. Display All Users" <<setw((totalWidth+1)-(strlen("5. Display All Users"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << "6. Exit" <<setw((totalWidth+1)-(strlen("6. Exit"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
 
-        cout << setw(colWidth - 9) << '+' << string(totalWidth, '-') << '+' << endl;
-        cout << setw(colWidth - 9) << '|' << setw(16) << '*' << "Welcome To Socialize" << '*' << setw((totalWidth - (strlen("Welcome To Socialize")) - 16)) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << string(totalWidth, '-') << '|' << endl;
-        //<< endl;
-        cout << setw(colWidth - 9) << '|' << "1. Login" << setw((totalWidth + 1) - (strlen("1. Login"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "2. Signup" << setw((totalWidth + 1) - (strlen("2. Signup"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "3. Help" << setw((totalWidth + 1) - (strlen("3. Help"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "4. About" << setw((totalWidth + 1) - (strlen("4. About"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "5. Display All Users" << setw((totalWidth + 1) - (strlen("5. Display All Users"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '|' << "6. Exit" << setw((totalWidth + 1) - (strlen("6. Exit"))) << '|' << endl;
-        cout << setw(colWidth - 9) << '+' << string(totalWidth, '-') << '+' << endl;
-
-        // system("cls");
-        // cout << "Welcome To Socialize" << endl
-        //      << endl;
-        // cout << "1. Login" << endl;
-        // cout << "2. Signup" << endl;
-        // cout << "3. Help" << endl;
-        // cout << "4. About" << endl;
-        // cout << "5. Display All Users" << endl;
-        // cout << "6. Exit" << endl;
     }
 
     void run()
     {
+        loading();
+
         while (true)
         {
             int choice;
@@ -1138,86 +1155,46 @@ public:
                 {
                 case 1:
                 {
-                    system("cls");
-                    cout << "\n\n\n\n\n\n";
-                    cout << string(30, '-') << "Socialize: Where Every Connection Counts." << string(30, '-') << endl;
-                    cout << "\nLoading.";
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Sleep(100);
-                        cout << ".";
-                    }
+                    loading();
                     loginPage.display();
                     break;
                 }
                 case 2:
                 {
-                    system("cls");
-                    cout << "\n\n\n\n\n\n";
-                    cout << string(30, '-') << "Socialize: Where Every Connection Counts." << string(30, '-') << endl;
-                    cout << "\nLoading.";
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Sleep(100);
-                        cout << ".";
-                    }
+                    loading();
                     signupPage.display();
                     break;
                 }
                 case 3:
                 {
-                    system("cls");
-                    cout << "\n\n\n\n\n\n";
-                    cout << string(30, '-') << "Socialize: Where Every Connection Counts." << string(30, '-') << endl;
-                    cout << "\nLoading.";
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Sleep(100);
-                        cout << ".";
-                    }
+                    loading();
                     helpPage.display();
                     break;
                 }
                 case 4:
                 {
-                    system("cls");
-                    cout << "\n\n\n\n\n\n";
-                    cout << string(30, '-') << "Socialize: Where Every Connection Counts." << string(30, '-') << endl;
-                    cout << "\nLoading.";
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Sleep(100);
-                        cout << ".";
-                    }
+                    loading();
                     aboutPage.display();
                     break;
                 }
                 case 5:
                 {
-                    system("cls");
-                    cout << "\n\n\n\n\n\n";
-                    cout << string(30, '-') << "Socialize: Where Every Connection Counts." << string(30, '-') << endl;
-                    cout << "\nLoading.";
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Sleep(100);
-                        cout << ".";
-                    }
+                    loading();
                     uinfo.displayAllUserInfo();
                     break;
                 }
                 case 6:
                 {
-                    system("cls");
-                    cout << "\n\n\n\n\n\n";
-                    cout << string(30, '-') << "Socialize: Where Every Connection Counts." << string(30, '-') << endl;
-                    cout << "\nLoading.";
-                    for (int i = 0; i < 10; i++)
-                    {
-                        Sleep(100);
-                        cout << ".";
-                    }
-                    Sleep(1000);
+                    loading();
+                    // system("cls");
+                    // cout << "\n\n\n\n\n\n";
+                    // cout <<string(30, '-') << "Socialize: Where Every Connection Counts." <<string(30, '-') <<endl;
+                    // cout << "\nLoading." ;
+                    // for(int i = 0; i < 10; i++) {
+                    //     Sleep(100);
+                    //     cout << ".";
+                    // }
+                    Sleep(100);
                     exit(0);
                 }
                 }
