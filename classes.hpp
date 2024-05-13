@@ -26,14 +26,26 @@ using namespace std;
 #define COMMENT_SIZE 50
 #define TITLE_SIZE 50
 
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string YELLOW = "\033[33m";
+const string BLUE = "\033[34m";
+const string MAGENTA = "\033[35m";
+const string CYAN = "\033[36m";
+const string WHITE = "\033[37m";
+const string LIGHT_RED = "\033[91m";
+const string LIGHT_GREEN = "\033[92m";
+const string LIGHT_YELLOW = "\033[93m";
+const string RESET_COLOR = "\033[0m";
+
 void loading() {
     system("cls");
         cout << "\n\n\n\n\n\n";
-        cout <<string(30, '-') << "Socialize: Where Every Connection Counts." <<string(30, '-') <<endl;
-        cout << "\nLoading." ;
+        cout <<BLUE <<string(30, '-') <<GREEN << "Socialize: Where Every Connection Counts." <<BLUE <<string(30, '-') <<endl;
+        cout <<GREEN << "\nLoading." ;
         for(int i = 0; i < 10; i++) {
             Sleep(100);
-            cout << ".";
+            cout <<BLUE << "." <<RESET_COLOR;
         }
 }
 
@@ -99,7 +111,7 @@ public:
     {
         system("cls");
         cout << '|' <<string(40, '-') <<'|' <<endl;
-        cout << '|' <<setw(5) <<'*' <<"Signup Page " <<"*" <<setw(40- (strlen("Signup Post Page "))) <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<GREEN <<"Signup Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Signup Post Page "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         cout << "\nEnter Full Name: " << endl;
         fflush(stdin);
@@ -140,12 +152,12 @@ public:
         {
             f.write(reinterpret_cast<char *>(this), sizeof(*this));
             f.close();
-            cout << "\nInformation stored successfully" << endl;
+            cout <<LIGHT_GREEN << "\nInformation stored successfully" <<RESET_COLOR << endl;
             system("pause");
         }
         else
         {
-            cout << "\nError Opening File" << endl;
+            cout <<RED << "\nError Opening File" <<RESET_COLOR << endl;
         }
     }
 
@@ -166,7 +178,7 @@ public:
             system("pause");
         }
         else
-            cout << "\nError Opening File" << endl;
+            cout <<RED << "\nError Opening File" <<RESET_COLOR << endl;
     }
 
     void displayUserInfo()
@@ -177,15 +189,15 @@ public:
         const int colWidth = 20;
         
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
-        cout << setw(colWidth-9) << '|' << setw(16) << '*' << "User Info" << '*' <<setw((totalWidth-(strlen("User Info"))-16)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << setw(16) << '*' <<GREEN << "User Info" <<RESET_COLOR << '*' <<setw((totalWidth-(strlen("User Info"))-16)) << '|'<< endl;
         cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
-        cout << setw(colWidth-9) << '|' << "Name: " << full_name <<setw((totalWidth+1)-((strlen("Name: ")) + (strlen(full_name)))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "Username: " << username <<setw((totalWidth+1)-((strlen("Username: ")) + (strlen(username))))  << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "Date Of Birth: " << date_of_birth <<setw((totalWidth+1)-((strlen("Date Of Birth: ")) + (strlen(date_of_birth)))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "Gender: " << gender <<setw((totalWidth+1)-((strlen("Gender: ")) + (strlen(gender)))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "Description/Bio: " << description <<setw((totalWidth+1)-((strlen("Description/Bio: ")) + (strlen(description)))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "Favourite Athele: " << security_question <<setw((totalWidth+1)-((strlen("Favourite Athele: ")) + (strlen(security_question)))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<MAGENTA << "Name: " <<BLUE << full_name <<RESET_COLOR <<setw((totalWidth+1)-((strlen("Name: ")) + (strlen(full_name)))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<MAGENTA << "Username: " <<BLUE << username <<RESET_COLOR <<setw((totalWidth+1)-((strlen("Username: ")) + (strlen(username))))  << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<MAGENTA << "Date Of Birth: " <<BLUE << date_of_birth <<RESET_COLOR <<setw((totalWidth+1)-((strlen("Date Of Birth: ")) + (strlen(date_of_birth)))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<MAGENTA << "Gender: " <<BLUE << gender <<RESET_COLOR <<setw((totalWidth+1)-((strlen("Gender: ")) + (strlen(gender)))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<MAGENTA << "Description/Bio: " <<BLUE << description <<RESET_COLOR<<setw((totalWidth+1)-((strlen("Description/Bio: ")) + (strlen(description)))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<MAGENTA << "Favourite Athele: " <<BLUE << security_question <<RESET_COLOR <<setw((totalWidth+1)-((strlen("Favourite Athele: ")) + (strlen(security_question)))) << '|'<< endl;
 
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
 
@@ -322,28 +334,28 @@ public:
         const int colWidth = 20;
         
         cout << string(totalWidth, '-') <<endl;
-        cout << "Post ID: " << post_ID <<endl; 
-        cout << "UserName: " << username <<endl; 
-        cout << "Post Title: " << title <<endl; 
+        cout <<GREEN << "Post ID: " <<BLUE << post_ID <<RESET_COLOR <<endl; 
+        cout <<GREEN << "UserName: " <<BLUE << username <<RESET_COLOR <<endl; 
+        cout <<GREEN << "Post Title: " <<BLUE << title <<RESET_COLOR <<endl; 
         cout <<endl;
-        cout <<string(4, '-') << "Post Content" <<string(4, '-') <<endl;
-        cout << content <<endl;
+        cout <<GREEN <<string(4, '-') << "Post Content" <<string(4, '-') <<endl;
+        cout <<BLUE << content <<RESET_COLOR <<endl;
 
-        cout << "LIKES: " << no_likes <<endl <<endl;
+        cout <<GREEN<< "LIKES: " <<BLUE << no_likes <<RESET_COLOR <<endl <<endl;
         if (no_comments)
         {
-            cout << "COMMENTS: " << endl;
+            cout <<GREEN << "COMMENTS: " << endl;
             for (int i = 0; i < no_comments; i++)
             {
                 // cout << "Username: " << comments[i].getusername() << endl;
                 // cout << "Comment: " << comments[i].getcontent()<< endl;
-                cout <<comments[i].getusername() <<": " << comments[i].getcontent() << endl;
+                cout <<GREEN <<comments[i].getusername() <<": " <<BLUE << comments[i].getcontent() <<RESET_COLOR << endl;
                 //cout << "Comment: " << comments[i].getcontent()<< endl;
             }
         }
         else
         {
-            cout << "(No Comments for this post)" << endl;
+            cout <<BLUE << "(No Comments for this post)" << endl;
         }
         cout << string(totalWidth, '-') <<endl;
         cout <<endl <<endl;
@@ -367,7 +379,7 @@ public:
         }
         else
         {
-            cout << "\nError Opening File" << endl;
+            cout <<RED << "\nError Opening File" <<RESET_COLOR << endl;
         }
     }
     void storeInFile()
@@ -379,12 +391,12 @@ public:
         {
             f.write(reinterpret_cast<char *>(this), sizeof(*this));
             f.close();
-            cout << "\nInformation stored successfully" << endl;
+            cout <<LIGHT_GREEN << "\nInformation stored successfully" <<RESET_COLOR << endl;
             system("pause");
         }
         else
         {
-            cout << "\nError Opening File" << endl;
+            cout <<RED << "\nError Opening File" <<RESET_COLOR << endl;
         }
     }
     void editPost()
@@ -422,22 +434,22 @@ public:
                 rename("temp.dat", "posts.dat");
                 if (!found)
                 {
-                    cout << "Error: Invalid ID, Or ID of other User" << endl;
+                    cout <<RED << "Error: Invalid ID, Or ID of other User" <<RESET_COLOR << endl;
                 }
                 else
                 {
-                    cout << "File has been edited successfully" << endl;
+                    cout <<LIGHT_GREEN << "File has been edited successfully" <<RESET_COLOR << endl;
                 }
                 system("pause");
             }
             else
             {
-                cout << "\nError Opening File" << endl;
+                cout <<RED << "\nError Opening File" <<RESET_COLOR << endl;
             }
         }
         else
         {
-            cout << "\nFILE not opened successfully" << endl;
+            cout <<RED << "\nFILE not opened successfully" <<RESET_COLOR << endl;
         }
     }
 
@@ -461,7 +473,7 @@ public:
                 f.read(reinterpret_cast<char *>(this), sizeof(Post));
                 while (f)
                 {
-                    if (post_ID == id)
+                    if (post_ID == id && (!strcmp(uname, username)))
                     {
                         found = 1;
                         char comment[COMMENT_SIZE];
@@ -483,23 +495,23 @@ public:
                 rename("temp.dat", "posts.dat");
                 if (!found)
                 {
-                    cout << "Error: Invalid ID" << endl;
+                    cout <<RED << "Error: Invalid ID" <<RESET_COLOR << endl;
                 }
                 else
                 {
-                    cout << "Comment has been added successfully" << endl;
+                    cout <<LIGHT_GREEN << "Comment has been added successfully" <<RESET_COLOR << endl;
                 }
                 cout << '|' <<string(40, '-') <<'|' <<endl;
                 system("pause");
             }
             else
             {
-                cout << "\nError Opening File" << endl;
+                cout <<RED << "\nError Opening File" <<RESET_COLOR << endl;
             }
         }
         else
         {
-            cout << "\nFILE not opened successfully" << endl;
+            cout <<RED << "\nFILE not opened successfully" <<RESET_COLOR << endl;
         }
     }
 
@@ -535,23 +547,23 @@ public:
                 rename("temp.dat", "posts.dat");
                 if (!found)
                 {
-                    cout << "Error: Invalid ID" << endl;
+                    cout <<RED << "Error: Invalid ID" <<RESET_COLOR << endl;
                 }
                 else
                 {
-                    cout << "Like has been added successfully" << endl;
+                    cout <<LIGHT_GREEN << "Like has been added successfully" <<RESET_COLOR << endl;
                 }
                 cout << '|' <<string(40, '-') <<'|' <<endl;
                 system("pause");
             }
             else
             {
-                cout << "\nError Opening File" << endl;
+                cout <<RED << "\nError Opening File" <<RESET_COLOR << endl;
             }
         }
         else
         {
-            cout << "\nFILE not opened successfully" << endl;
+            cout <<RED << "\nFILE not opened successfully" <<RESET_COLOR << endl;
         }
     }
 
@@ -590,11 +602,11 @@ public:
                 rename("temp.dat", "posts.dat");
                 if (!found)
                 {
-                    cout << "Error: Invalid ID, Or ID of other User" << endl;
+                    cout <<RED << "Error: Invalid ID, Or ID of other User" <<RESET_COLOR << endl;
                 }
                 else
                 {
-                    cout << "Post has been deleted successfully" << endl;
+                    cout <<LIGHT_GREEN << "Post has been deleted successfully" <<RESET_COLOR << endl;
                 }
                  cout << '|' <<string(40, '-') <<'|' <<endl;
 
@@ -602,12 +614,12 @@ public:
             }
             else
             {
-                cout << "\nError Opening File" << endl;
+                cout <<RED << "\nError Opening File" <<RESET_COLOR << endl;
             }
         }
         else
         {
-            cout << "\nFILE not opened successfully" << endl;
+            cout <<RED << "\nFILE not opened successfully" <<RESET_COLOR << endl;
         }
     }
 };
@@ -632,10 +644,10 @@ public:
         const int colWidth = 20;
         
         cout << '+' << string(totalWidth, '-') << '+' <<endl;
-        cout << '|' << setw(16) <<'*' << "VIEW POST PAGE" <<'*' <<setw((totalWidth-(strlen("VIEW POST PAGE"))-16)) << '|'<< endl;
+        cout << '|' << setw(16) <<'*' <<GREEN << "VIEW POST PAGE" <<RESET_COLOR <<'*' <<setw((totalWidth-(strlen("VIEW POST PAGE"))-16)) << '|'<< endl;
         cout << setw(colWidth-9) << string(totalWidth, '-') <<endl;
 
-        cout << "This is the View Post Page of The User." << endl;
+        cout <<MAGENTA << "This is the View Post Page of The User." <<RESET_COLOR << endl;
         post.displayAllPostData();
         system("pause");
     }
@@ -657,7 +669,7 @@ public:
     {
         system("cls");
         cout << '|' <<string(40, '-') <<'|' <<endl;
-        cout << '|' <<setw(5) <<'*' <<"Create Post Page " <<"*" <<setw(40- (strlen("Create Post Page      "))) <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<GREEN <<"Create Post Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Create Post Page      "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         post.getPostData();
 
@@ -668,8 +680,8 @@ public:
         else
         {
             cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
-            cout <<setw(10) <<'|' << "Post Not created!! " <<setw(40- strlen("Post Not created!!")) <<'|' << endl;
-            cout <<setw(10) <<'|' << "Post ID should be unique " <<setw(40- strlen("Post ID should be unique")) <<'|' << endl;
+            cout <<setw(10) <<'|' <<RED << "Post Not created!! " <<RESET_COLOR <<setw(40- strlen("Post Not created!!")) <<'|' << endl;
+            cout <<setw(10) <<'|' <<RED << "Post ID should be unique " <<RESET_COLOR <<setw(40- strlen("Post ID should be unique")) <<'|' << endl;
             cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
             system("pause");
         }
@@ -719,7 +731,7 @@ public:
         system("cls");
         // cout << "This is This is Edit Post Page of The User" << endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
-        cout << '|' <<setw(5) <<'*' <<"Edit Post Page " <<"*" <<setw(40- (strlen("Edit Post Page      "))) <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<GREEN<<"Edit Post Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Edit Post Page      "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         post.editPost();
         system("pause");
@@ -744,7 +756,7 @@ public:
         system("cls");
         // cout << "This is This is Delete Post Page of The User" << endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
-        cout << '|' <<setw(5) <<'*' <<"Delete Post Page " <<"*" <<setw(40- (strlen("Delete Post Page      "))) <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<GREEN <<"Delete Post Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Delete Post Page      "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         post.deletePost();
         system("pause");
@@ -768,7 +780,7 @@ public:
         system("cls");
         // cout << "This is This is Add Comments Page of The User" << endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
-        cout << '|' <<setw(5) <<'*' <<"Add Comment Page " <<"*" <<setw(40- (strlen("Add Comment Page      "))) <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<GREEN <<"Add Comment Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Add Comment Page      "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         post.addComment();
         system("pause");
@@ -791,7 +803,7 @@ public:
         system("cls");
         //cout << "This is This is Add Like Page of The User" << endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
-        cout << '|' <<setw(5) <<'*' <<"Add Like Page " <<"*" <<setw(40- (strlen("Add Like Page      "))) <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<GREEN <<"Add Like Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Add Like Page      "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         post.increaseLike();
         system("pause");
@@ -854,20 +866,20 @@ public:
         const int colWidth = 20;
         
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
-        cout << setw(colWidth-9) << '|' << setw(16) <<'*' << "----" << "SOCIALIZE" << "----" <<'*' <<setw((totalWidth-(strlen("SOCIALIZE"))-24)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << setw(16) <<'*' <<GREEN << "----" << "SOCIALIZE" << "----" <<RESET_COLOR <<'*' <<setw((totalWidth-(strlen("SOCIALIZE"))-24)) << '|'<< endl;
         cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
-        cout << setw(colWidth-9) << '|' << setw(16) << '*' << "Account DashBoard For " << '*' <<setw((totalWidth-(strlen("Account DashBoard For "))-16)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << setw(16) << '*' <<GREEN << "Account DashBoard For " <<RESET_COLOR << '*' <<setw((totalWidth-(strlen("Account DashBoard For "))-16)) << '|'<< endl;
         cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
-        cout << setw(colWidth-9) << '|' << "1. View All Posts" <<setw((totalWidth+1)-(strlen("1. View All Posts"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "2. Create Post" <<setw((totalWidth+1)-(strlen("2. Create Post"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "3. Edit Post" <<setw((totalWidth+1)-(strlen("3. Edit Post"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "4. Delete Post" <<setw((totalWidth+1)-(strlen("4. Delete Post"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "5. Add Comment To Post" <<setw((totalWidth+1)-(strlen("5. Add Comment To Post"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "6. Add Like To Post" <<setw((totalWidth+1)-(strlen("6. Add Like To Post"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "7. View Your Information" <<setw((totalWidth+1)-(strlen("7. View Your Information"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "8. Logout Account" <<setw((totalWidth+1)-(strlen("8. Logout Account"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "9. Exit" <<setw((totalWidth+1)-(strlen("9. Exit"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "1. View All Posts" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("1. View All Posts"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "2. Create Post" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("2. Create Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "3. Edit Post" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("3. Edit Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "4. Delete Post" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("4. Delete Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "5. Add Comment To Post" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("5. Add Comment To Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "6. Add Like To Post" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("6. Add Like To Post"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "7. View Your Information" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("7. View Your Information"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "8. Logout Account" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("8. Logout Account"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "9. Exit" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("9. Exit"))) << '|'<< endl;
         cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
     }
@@ -880,8 +892,9 @@ public:
             do
             {
                 displayMenu();
-                cout << "\nEnter your choice: ";
+                cout <<MAGENTA<< "\nEnter your choice: " <<BLUE;
                 choice = getch() - '0';
+                cout <<RESET_COLOR;
                 switch (choice)
                 {
                 case 1:
@@ -962,30 +975,23 @@ public:
     {
         system("cls");
         cout << '|' <<string(40, '-') <<'|' <<endl;
-        cout << '|' <<setw(5) <<'*' <<"Login Page " <<"*" <<setw(40- (strlen("login Post Page "))) <<'|' <<endl;
+        cout << '|' <<setw(5) <<'*' <<GREEN <<"Login Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("login Post Page "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
-        cout << "\nUsername: ";
+        cout <<BLUE << "\nUsername: ";
         fflush(stdin);
         scanf("%[^\n]s", username);
-        cout << "Password: ";
+        cout <<BLUE << "Password: " ;
         fflush(stdin);
         scanf("%[^\n]s", password);
-        cout << '|' <<string(40, '-') <<'|' <<endl;
+        cout <<RESET_COLOR << '|' <<string(40, '-') <<'|' <<endl;
 
 
         UserInfo userinfo;
 
         if (userinfo.isValidInfo(username, password))
         {
-            system("cls");
-            cout << "\n\n\n\n\n\n";
-            cout <<string(30, '-') << "Socialize: Where Every Connection Counts." <<string(30, '-') <<endl;
-            cout << "\nLoading." ;
-            for(int i = 0; i < 5; i++) {
-                Sleep(100);
-                cout << ".";
-            }
-            cout << "\n\n" << "Login Successful." ;
+            loading();
+            cout << "\n\n" <<GREEN << "Login Successful." <<RESET_COLOR;
             for(int i = 0; i < 5; i++) {
                 Sleep(100);
                 cout << ".";
@@ -996,9 +1002,9 @@ public:
         else
         {
             cout <<'|' <<string(40,'-') << '|' <<endl;
-            cout <<'|' << "Login Failed " <<setw(40- strlen("Login Failed")) <<'|' << endl;
-            cout <<'|' << "Incorrect username or password " <<setw(40- strlen("Incorrect username or password")) <<'|'  <<endl;
-            cout <<'|'<< "Try Again. " <<setw(40- strlen("Try Again.")) <<'|' <<endl;
+            cout <<'|' <<RED << "Login Failed " <<RESET_COLOR <<setw(40- strlen("Login Failed")) <<'|' << endl;
+            cout <<'|' <<RED << "Incorrect username or password " <<RESET_COLOR <<setw(40- strlen("Incorrect username or password")) <<'|'  <<endl;
+            cout <<'|' <<RED << "Try Again. " <<RESET_COLOR <<setw(40- strlen("Try Again.")) <<'|' <<endl;
             cout <<'|' <<string(40,'-') << '|' <<endl;
         }
 
@@ -1024,7 +1030,7 @@ public:
         else
         {
             cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
-            cout <<setw(10) <<'|' << "Username already exists " <<setw(40- strlen("Username already exists")) <<'|' << endl;
+            cout <<setw(10) <<'|' <<RED << "Username already exists " <<RESET_COLOR <<setw(40- strlen("Username already exists")) <<'|' << endl;
             cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
             system("pause");
         }
@@ -1071,11 +1077,11 @@ public:
         const int colWidth = 20;
 
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
-        cout << setw(colWidth-9) << '|' << setw(25) << '*' << "HELP" << '*' <<setw((totalWidth-(strnlen("HELP",100))-25)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << setw(25) << '*' <<GREEN << "HELP" <<RESET_COLOR << '*' <<setw((totalWidth-(strnlen("HELP",100))-25)) << '|'<< endl;
         cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
-        cout << setw(colWidth-9) << '|' << "You can further reach us on whatsapp for help or email us for " <<setw((totalWidth+1)-(strlen("You can further reach us on whatsapp for help or email us for "))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "any query at socialize.team@gamil.com " <<setw((totalWidth+1)-(strlen("any query at socialize.team@gamil.com "))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "You can further reach us on whatsapp for help or email us for " <<RESET_COLOR <<setw((totalWidth+1)-(strlen("You can further reach us on whatsapp for help or email us for "))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "any query at socialize.team@gamil.com " <<RESET_COLOR <<setw((totalWidth+1)-(strlen("any query at socialize.team@gamil.com "))) << '|'<< endl;
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
 
         system("pause");
@@ -1092,16 +1098,16 @@ public:
         const int colWidth = 25;
         
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
-        cout << setw(colWidth-9) << '|' << setw(22) << '*' << "About Page" << '*' <<setw((totalWidth-(strlen("About Page"))-22)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << setw(22) << '*' <<GREEN << "About Page" <<RESET_COLOR<< '*' <<setw((totalWidth-(strlen("About Page"))-22)) << '|'<< endl;
         cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
-        cout << setw(colWidth-9) << '|' << "Socialize is a platform where you can create posts, like, " <<setw((totalWidth+1)-(strlen("Socialize is a platform where you can create posts, like, "))) << '|' <<endl;
-        cout << setw(colWidth-9) << '|' << "comment, and connect with others in a friendly community" <<setw((totalWidth+1)-(strlen("comment, and connect with others in a friendly community"))) << '|' <<endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "Socialize is a platform where you can create posts, like, " <<RESET_COLOR<<setw((totalWidth+1)-(strlen("Socialize is a platform where you can create posts, like, "))) << '|' <<endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "comment, and connect with others in a friendly community" <<RESET_COLOR<<setw((totalWidth+1)-(strlen("comment, and connect with others in a friendly community"))) << '|' <<endl;
         cout << setw(colWidth-9) << '|' << setw(totalWidth+1) << '|' <<endl;
         cout << setw(colWidth-9) << '|' << setw(totalWidth+1) << '|' <<endl;
 
-        cout << setw(colWidth-9) << '|' << "Created by Farhan, Sabih and Saad" <<setw((totalWidth+1)-(strlen("Created by Farhan, Sabih and Saad"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' <<setw(totalWidth+1) <<right << "Version 1.0|" <<endl; //<<setw((totalWidth+1)-(strlen("Created by Farhan, Sabih and Saad"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "Created by Farhan, Sabih and Saad" <<RESET_COLOR<<setw((totalWidth+1)-(strlen("Created by Farhan, Sabih and Saad"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<setw(totalWidth-6) <<right <<BLUE << "Version 1.0" <<RESET_COLOR <<"|" <<endl; 
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
         
         system("pause");
@@ -1126,15 +1132,15 @@ public:
         const int colWidth = 20;
         
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
-        cout << setw(colWidth-9) << '|' << setw(16) << '*' << "Welcome To Socialize" << '*' <<setw((totalWidth-(strlen("Welcome To Socialize"))-16)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << setw(16) << '*' <<GREEN << "Welcome To Socialize" <<RESET_COLOR << '*' <<setw((totalWidth-(strlen("Welcome To Socialize"))-16)) << '|'<< endl;
         cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
              //<< endl;
-        cout << setw(colWidth-9) << '|' << "1. Login" <<setw((totalWidth+1)-(strlen("1. Login"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "2. Signup" <<setw((totalWidth+1)-(strlen("2. Signup"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "3. Help" <<setw((totalWidth+1)-(strlen("3. Help"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "4. About" <<setw((totalWidth+1)-(strlen("4. About"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "5. Display All Users" <<setw((totalWidth+1)-(strlen("5. Display All Users"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' << "6. Exit" <<setw((totalWidth+1)-(strlen("6. Exit"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "1. Login" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("1. Login"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "2. Signup" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("2. Signup"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "3. Help" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("3. Help"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "4. About" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("4. About"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "5. Display All Users" <<RESET_COLOR <<setw((totalWidth+1)-((strlen("5. Display All Users")))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "6. Exit" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("6. Exit"))) << '|'<< endl;
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
 
     }
@@ -1149,8 +1155,9 @@ public:
             do
             {
                 displayMenu();
-                cout << "\nEnter your choice: ";
+                cout <<MAGENTA << "\nEnter your choice: " <<BLUE;
                 choice = getch() - '0';
+                cout << RESET_COLOR;
                 switch (choice)
                 {
                 case 1:
