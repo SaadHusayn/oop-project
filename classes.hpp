@@ -1,17 +1,17 @@
 #ifndef CLASSES_H
 #define CLASSES_H
 
-#include <iostream>
-#include<ios>
-#include<cstdio>
-#include<limits>
-#include <windows.h>
-#include <conio.h>
-#include <stdlib.h>
-#include <fstream>
-#include <string.h>
+#include <iostream>  // for cout
+#include<ios>        // for streamsize
+#include<cstdio>     // for scanf and fflush
+#include<limits>     // for numeric_limits
+#include <windows.h> // for system
+#include <conio.h>   // for getch
+#include <stdlib.h>  //  
+#include <fstream>   //  for filing
+// #include <string.h>  //  for strcpy, strcmp
 #include <iomanip>
-#include <cstring>
+#include <cstring>   // for strlen
 using namespace std;
 
 #define USERNAME_SIZE 20
@@ -224,8 +224,12 @@ public:
             f.close();
             return false;
         }
-        else
+        else{
             cerr << "\nError Opening File" << endl;
+            return false;
+        }
+            
+
     }
 };
 class Comment
@@ -249,8 +253,8 @@ public:
 
     void setcontent(const char *_content)
     {
-        strncpy(content, _content, CONTENT_SIZE - 1);
-        content[CONTENT_SIZE - 1] = '\0';
+        strncpy(content, _content, COMMENT_SIZE - 1);
+        content[COMMENT_SIZE - 1] = '\0';
     }
     const char *getcontent() { return content; }
 };
@@ -473,7 +477,7 @@ public:
                 f.read(reinterpret_cast<char *>(this), sizeof(Post));
                 while (f)
                 {
-                    if (post_ID == id && (!strcmp(uname, username)))
+                    if (post_ID == id)
                     {
                         found = 1;
                         char comment[COMMENT_SIZE];
@@ -649,7 +653,6 @@ public:
 
         cout <<MAGENTA << "This is the View Post Page of The User." <<RESET_COLOR << endl;
         post.displayAllPostData();
-        system("pause");
     }
 };
 
@@ -685,7 +688,6 @@ public:
             cout  <<'|' <<string(40,'-') << '|' <<endl;
             system("pause");
         }
-        system("pause");
     }
 
     bool isUniqueID()
@@ -709,6 +711,10 @@ public:
             }
             f.close();
             return isUnique;
+        }
+        else{
+            cerr << "\nError Opening File"<<endl;
+            return false;
         }
     }
 };
@@ -734,7 +740,6 @@ public:
         cout << '|' <<setw(5) <<'*' <<GREEN<<"Edit Post Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Edit Post Page      "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         post.editPost();
-        system("pause");
     }
 };
 
@@ -759,7 +764,6 @@ public:
         cout << '|' <<setw(5) <<'*' <<GREEN <<"Delete Post Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Delete Post Page      "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         post.deletePost();
-        system("pause");
     }
 };
 
@@ -783,7 +787,6 @@ public:
         cout << '|' <<setw(5) <<'*' <<GREEN <<"Add Comment Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Add Comment Page      "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         post.addComment();
-        system("pause");
     }
 };
 
@@ -801,12 +804,10 @@ public:
     void display()
     {
         system("cls");
-        //cout << "This is This is Add Like Page of The User" << endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         cout << '|' <<setw(5) <<'*' <<GREEN <<"Add Like Page " <<RESET_COLOR <<"*" <<setw(40- (strlen("Add Like Page      "))) <<'|' <<endl;
         cout << '|' <<string(40, '-') <<'|' <<endl;
         post.increaseLike();
-        system("pause");
     }
 };
 
@@ -1030,9 +1031,9 @@ public:
         }
         else
         {
-            cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
-            cout <<setw(10) <<'|' <<RED << "Username already exists " <<RESET_COLOR <<setw(40- strlen("Username already exists")) <<'|' << endl;
-            cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
+            cout <<'|' <<string(40,'-') << '|' <<endl;
+            cout <<'|' <<RED << "Username already exists " <<RESET_COLOR <<setw(40- strlen("Username already exists")) <<'|' << endl;
+            cout <<'|' <<string(40,'-') << '|' <<endl;
             system("pause");
         }
     }
@@ -1060,8 +1061,9 @@ public:
             return isUnique;
         }
         else
-        {
+        {   
             cout << "\nError Opening File" << endl;
+            return false;
         }
     }
 };
@@ -1140,8 +1142,7 @@ public:
         cout << setw(colWidth-9) << '|' <<BLUE << "2. Signup" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("2. Signup"))) << '|'<< endl;
         cout << setw(colWidth-9) << '|' <<BLUE << "3. Help" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("3. Help"))) << '|'<< endl;
         cout << setw(colWidth-9) << '|' <<BLUE << "4. About" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("4. About"))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' <<BLUE << "5. Display All Users" <<RESET_COLOR <<setw((totalWidth+1)-((strlen("5. Display All Users")))) << '|'<< endl;
-        cout << setw(colWidth-9) << '|' <<BLUE << "6. Exit" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("6. Exit"))) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' <<BLUE << "5. Exit" <<RESET_COLOR <<setw((totalWidth+1)-(strlen("5. Exit"))) << '|'<< endl;
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
 
     }
@@ -1188,12 +1189,6 @@ public:
                 case 5:
                 {
                     loading();
-                    uinfo.displayAllUserInfo();
-                    break;
-                }
-                case 6:
-                {
-                    loading();
                     // system("cls");
                     // cout << "\n\n\n\n\n\n";
                     // cout <<string(30, '-') << "Socialize: Where Every Connection Counts." <<string(30, '-') <<endl;
@@ -1206,7 +1201,7 @@ public:
                     exit(0);
                 }
                 }
-            } while (choice < 1 || choice > 6);
+            } while (choice < 1 || choice > 5);
         }
     }
 };
