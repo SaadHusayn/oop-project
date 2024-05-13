@@ -679,10 +679,10 @@ public:
         }
         else
         {
-            cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
-            cout <<setw(10) <<'|' <<RED << "Post Not created!! " <<RESET_COLOR <<setw(40- strlen("Post Not created!!")) <<'|' << endl;
-            cout <<setw(10) <<'|' <<RED << "Post ID should be unique " <<RESET_COLOR <<setw(40- strlen("Post ID should be unique")) <<'|' << endl;
-            cout <<setw(10) <<'|' <<string(40,'-') << '|' <<endl;
+            cout  <<'|' <<string(40,'-') << '|' <<endl;
+            cout  <<'|' <<RED << "Post Not created!! " <<RESET_COLOR <<setw(40- strlen("Post Not created!!")) <<'|' << endl;
+            cout  <<'|' <<RED << "Post ID should be unique " <<RESET_COLOR <<setw(40- strlen("Post ID should be unique")) <<'|' << endl;
+            cout  <<'|' <<string(40,'-') << '|' <<endl;
             system("pause");
         }
         system("pause");
@@ -955,7 +955,8 @@ public:
                 }
                 case 9:
                 {
-                    Sleep(1000);
+                    loading();
+                    system("cls");
                     exit(0);
                 }
                 }
@@ -1201,7 +1202,7 @@ public:
                     //     Sleep(100);
                     //     cout << ".";
                     // }
-                    Sleep(100);
+                    system("cls");
                     exit(0);
                 }
                 }
