@@ -1080,7 +1080,7 @@ public:
         const int colWidth = 20;
 
         cout << setw(colWidth-9) << '+' << string(totalWidth, '-') << '+' <<endl;
-        cout << setw(colWidth-9) << '|' << setw(25) << '*' <<GREEN << "HELP" <<RESET_COLOR << '*' <<setw((totalWidth-(strnlen("HELP",100))-25)) << '|'<< endl;
+        cout << setw(colWidth-9) << '|' << setw(25) << '*' <<GREEN << "HELP" <<RESET_COLOR << '*' <<setw((totalWidth-(strlen("HELP"))-25)) << '|'<< endl;
         cout << setw(colWidth-9) << '|' << string(totalWidth, '-') << '|' <<endl;
 
         cout << setw(colWidth-9) << '|' <<BLUE << "You can further reach us on whatsapp for help or email us for " <<RESET_COLOR <<setw((totalWidth+1)-(strlen("You can further reach us on whatsapp for help or email us for "))) << '|'<< endl;
